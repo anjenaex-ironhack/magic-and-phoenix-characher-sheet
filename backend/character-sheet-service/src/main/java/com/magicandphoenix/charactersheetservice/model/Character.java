@@ -18,6 +18,7 @@ public class Character {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long userId;
     private String name;
     @Enumerated(EnumType.STRING)
     private RacialLineage racialLineage;
@@ -55,6 +56,7 @@ public class Character {
     public Character(CharacterDTO characterDTO) {
         //basic info
         setName(characterDTO.getName());
+        setUserId(characterDTO.getUserId());
         setRacialLineage(RacialLineage.valueOf(characterDTO.getRacialLineage().toUpperCase()));
         setCountry(Country.valueOf(characterDTO.getCountry().toUpperCase()));
         setProfession(Profession.valueOf(characterDTO.getProfession().toUpperCase()));
@@ -75,9 +77,10 @@ public class Character {
         setConjuration(characterDTO.getConjuration());
     }
 
-    public Character(String name, RacialLineage racialLineage, Country country, Profession profession, int px, int physical, int skill, int mental, int social, int athletics, int knowledge, int interpretation, int perception, int caution, int conjuration) {
+    public Character(Long userId, String name, RacialLineage racialLineage, Country country, Profession profession, int px, int physical, int skill, int mental, int social, int athletics, int knowledge, int interpretation, int perception, int caution, int conjuration) {
         //basic info
         setName(name);
+        setUserId(userId);
         setRacialLineage(racialLineage);
         setCountry(country);
         setProfession(profession);
@@ -224,6 +227,14 @@ public class Character {
 
     public void setConjuration(int conjuration) {
         this.conjuration = conjuration;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
 

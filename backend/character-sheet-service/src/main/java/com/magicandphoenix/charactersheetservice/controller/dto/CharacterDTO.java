@@ -16,6 +16,9 @@ public class CharacterDTO {
     private String name;
 
     @NotEmpty
+    private Long userId;
+
+    @NotEmpty
     private String racialLineage;
 
     @NotEmpty
@@ -49,6 +52,7 @@ public class CharacterDTO {
     public CharacterDTO(Character character){
         //basic info
         setName(character.getName());
+        setUserId(character.getUserId());
         setRacialLineage(character.getRacialLineage().toString());
         setCountry(character.getCountry().toString());
         setProfession(character.getProfession().toString());
@@ -187,5 +191,13 @@ public class CharacterDTO {
 
     public void setConjuration(int conjuration) {
         this.conjuration = conjuration;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

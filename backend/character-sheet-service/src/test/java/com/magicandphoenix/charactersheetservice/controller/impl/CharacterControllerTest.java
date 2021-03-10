@@ -46,9 +46,9 @@ class CharacterControllerTest {
     void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
-        Character samirAlKhamid = new Character("Samir Al-Khamid", RacialLineage.UNARII, Country.SURKAYA, Profession.NOBLE, 45,
+        Character samirAlKhamid = new Character(1L, "Samir Al-Khamid", RacialLineage.UNARII, Country.SURKAYA, Profession.NOBLE, 45,
                 7,7,7,8,5,2,3,3,2,2);
-        Character franciscoAbascal = new Character("Francisco Abascal", RacialLineage.UNARII, Country.ISPANSAR, Profession.SOLDIER, 5,
+        Character franciscoAbascal = new Character(2L,"Francisco Abascal", RacialLineage.UNARII, Country.ISPANSAR, Profession.SOLDIER, 5,
                 9,10,6,5,5,0,0,1,0,0);
 
         characterRepository.saveAll(List.of(samirAlKhamid, franciscoAbascal));
@@ -81,7 +81,7 @@ class CharacterControllerTest {
 
     @Test
     void createCharacter() throws Exception {
-        Character TartKross = new Character("TartKross", RacialLineage.LORANÄE, Country.BRITEN, Profession.DOCTOR, 450,
+        Character TartKross = new Character(1L, "TartKross", RacialLineage.LORANÄE, Country.BRITEN, Profession.DOCTOR, 450,
                 7,7,10,8,5,5,4,3,3,0);
 
         String body = objectMapper.writeValueAsString((TartKross));
@@ -98,7 +98,7 @@ class CharacterControllerTest {
     void upgradeCharacterById() throws Exception {
         List<Character> characterList = characterRepository.findAll();
         Long samirId = characterList.get(0).getId();
-        Character nuevoSamir = new Character("Nuevo Samir Al-Khamid", RacialLineage.LORANÄE, Country.BRITEN, Profession.DOCTOR, 450,
+        Character nuevoSamir = new Character(1L, "Nuevo Samir Al-Khamid", RacialLineage.LORANÄE, Country.BRITEN, Profession.DOCTOR, 450,
                 7,7,10,8,5,5,4,3,3,0);
 
         String body = objectMapper.writeValueAsString(nuevoSamir);

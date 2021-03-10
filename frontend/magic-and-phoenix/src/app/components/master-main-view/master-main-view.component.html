@@ -1,0 +1,18 @@
+<h2>Name</h2>
+<button>Log out</button>
+
+<br><br>
+
+<h2>Select a game</h2>
+
+<form (ngSubmit)="increasePx()" >
+
+<input type="number" name="increasePx" placeHolder="px">
+
+<button type="submit">Increase Group Experience</button>
+</form>
+
+
+<ul>
+    <li *ngFor="let characterSheet of characterSheetList; let index = index">Name of the game</li>
+</ul>

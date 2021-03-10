@@ -1,12 +1,15 @@
 <h2>Magic & Phoenix</h2>
 
-<form action="">
+<form (ngSubmit)="login(form.value)" [formGroup]="form">
 
     <label for="name">Name</label><br>
-    <input type="text" name="name" placeholder="insert your name here"><br>
+    <input formControlName = "name" type="text" name="name" placeholder="insert your name here"><br>
+    <p class="error-msg" *ngIf="nameField.hasError('required') && nameField.touched">Email is required</p>
     <br>
     <label for="password">Password</label><br>
-    <input type="password" name="Password" placeholder="insert your password here">
+    <input formControlName = "password" type="password" name="Password" placeholder="insert your password here">
+    <p class="error-msg" *ngIf="passwordField.hasError('required') && passwordField.touched">Password is required</p>
+    <p class="error-msg" *ngIf="passwordField.hasError('minlength')">Password must be at least 7 characters</p>
 
     <br><br>
 

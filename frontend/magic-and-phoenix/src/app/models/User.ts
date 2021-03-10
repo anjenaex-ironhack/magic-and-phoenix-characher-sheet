@@ -1,4 +1,10 @@
 export class User {
+    public get id(): number {
+        return this._id;
+    }
+    public set id(value: number) {
+        this._id = value;
+    }
     public get nombre(): string {
         return this._nombre;
     }
@@ -20,9 +26,11 @@ export class User {
 
     
     constructor(
+
+        private _id: number,
+        private _nombre: string,
         private _email: string,
-        private _password: string,
-        private _nombre: string
+        private _password: string
     ){
 
     }
