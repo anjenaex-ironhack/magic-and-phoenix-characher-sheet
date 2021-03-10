@@ -2,6 +2,12 @@ import { User } from "./user";
 
 
 export class Game {
+    public get accessPassword(): string {
+        return this._accessPassword;
+    }
+    public set accessPassword(value: string) {
+        this._accessPassword = value;
+    }
     public get id(): number {
         return this._id;
     }
@@ -27,7 +33,11 @@ export class Game {
         this._name = value;
     }
     constructor(
+        //MetaData
         private _id: number,
+        private _accessPassword: string,
+
+        //Basic info
         private _name: String,
         private _master: User,
         private _userList: User[]

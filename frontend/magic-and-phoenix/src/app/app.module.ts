@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +12,9 @@ import { MainViewComponent } from './components/main-view/main-view.component';
 import { PlayerCharacterSheetComponent } from './components/player-character-sheet/player-character-sheet.component';
 import { EditableCharacterSheetComponent } from './components/editable-character-sheet/editable-character-sheet.component';
 import { MasterMainViewComponent } from './components/master-main-view/master-main-view.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { PlayerMainViewComponent } from './components/player-main-view/player-main-view.component';
+import { CreateCharacterSheetComponent } from './components/create-character-sheet/create-character-sheet.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +24,17 @@ import { MasterMainViewComponent } from './components/master-main-view/master-ma
     MainViewComponent,
     PlayerCharacterSheetComponent,
     EditableCharacterSheetComponent,
-    MasterMainViewComponent
+    MasterMainViewComponent,
+    NotFoundComponent,
+    PlayerMainViewComponent,
+    CreateCharacterSheetComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

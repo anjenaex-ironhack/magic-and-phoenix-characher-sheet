@@ -15,4 +15,8 @@ export class MainViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  showGameList():void{
+    
+  }
+
 }
