@@ -1,13 +1,7 @@
-import { Game } from "./game";
-import { User } from "./user";
+import { Game } from "../models/game";
+import { User } from "../models/user";
 
-export class Character {
-    public get setUserId(): User {
-        return this._setUserId;
-    }
-    public set setUserId(value: User) {
-        this._setUserId = value;
-    }
+export class CharacterDTO {
     
     public get conjuration(): number {
         return this._conjuration;
@@ -93,34 +87,27 @@ export class Character {
     public set racialLineage(value: String) {
         this._racialLineage = value;
     }
-    public get id(): number {
-        return this._id;
-    }
-    public set id(value: number) {
-        this._id = value;
-    }
+
     public get name(): string {
         return this._name;
     }
     public set name(value: string) {
         this._name = value;
     }
-    public get user(): User {
-        return this._user;
+    public get userId(): string {
+        return this._userId;
     }
-    public set user(value: User) {
-        this._user = value;
+    public set user(value: string) {
+        this._userId = value;
     }
 
     constructor(
 
-        //MetaData
-        private _id: number,
-        private _gameId: Game,
-        private _setUserId: User,
+ 
+        private _gameIdList: Game[],
 
         //Basic info
-        private _user: User,
+        private _userId: string,
         private _name: string,
         private _racialLineage: String,
         private _country: String,
@@ -149,4 +136,3 @@ export class Character {
 
     }
 }
-

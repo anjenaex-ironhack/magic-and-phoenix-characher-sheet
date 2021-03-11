@@ -1,21 +1,21 @@
-<button>go back</button>
+<button (click) = "goBack()">go back</button>
 <h2>Game name</h2>
 <button>log out</button>
 
 <br><br>
 
-<form>
+<form (ngSubmit)="createCharacter(form)" [formGroup] = form>
     <label for="name">Character name</label><br>
-    <input type="text" name="user" placeholder="name"><br>
+    <input formControlName="name" type="text" name="user" placeholder="name"><br>
 
     <label for="racialLineage">Racial Lineage</label><br>
-    <input type="text" name="racialLineage" placeholder="Racial Lineage"><br>
+    <input formControlName="racialLineage" type="text" name="racialLineage" placeholder="Racial Lineage"><br>
 
     <label for="country">Country</label><br>
-    <input type="text" name="country" placeholder="Country"><br>
+    <input formControlName="country" type="text" name="country" placeholder="Country"><br>
 
     <label for="profession">Profession</label><br>
-    <input type="text" name="user" placeholder="profession"><br>
+    <input formControlName="profession" type="text" name="user" placeholder="profession"><br>
 
     <br>
     <label for="px">Px</label><br>
@@ -23,39 +23,39 @@
 
     <br>
     <label for="physical">Physical</label><br>
-    <input disabled type="number" name="physical" placeholder="Physical">
+    <input formControlName="physical" [disabled]="true" type="number" name="physical" placeholder="Physical">
     <button>+</button><button>-</button><br>
 
     <label for="skill">Skill</label><br>
-    <input disabled type="number" name="skill" placeholder="Skill">
+    <input formControlName="skill" name="skill" placeholder="Skill">
     <button>+</button><button>-</button><br>
 
     <label for="mental">Mental</label><br>
-    <input disabled type="number" name="mental" placeholder="Mental">
+    <input formControlName="mental" type="number" name="mental" placeholder="Mental">
     <button>+</button><button>-</button><br>
 
     <label for="Social">Social</label><br>
-    <input disabled type="number" name="social" placeholder="Social">
+    <input formControlName="social" type="number" name="social" placeholder="Social">
     <button>+</button><button>-</button><br>
 
     <br>
     <label for="athletics">Athletics</label><br>
-    <input disabled type="number" name="athletics" placeholder="Athletics">
+    <input formControlName="athletics" type="number" name="athletics" placeholder="Athletics">
     <button>+</button><button>-</button><br>
     <label for="knowledge">Knowledge</label><br>
-    <input disabled type="number" name="knowledge" placeholder="Knowledge">
+    <input formControlName="knowledge" type="number" name="knowledge" placeholder="Knowledge">
     <button>+</button><button>-</button><br>
     <label for="interpretation">Interpretation</label><br>
-    <input disabled type="number" name="interpretation" placeholder="Interpretation">
+    <input formControlName="interpretation" type="number" name="interpretation" placeholder="Interpretation">
     <button>+</button><button>-</button><br>
     <label for="perception">Perception</label><br>
-    <input disabled type="number" name="perception" placeholder="Perception">
+    <input formControlName="perception" type="number" name="perception" placeholder="Perception">
     <button>+</button><button>-</button><br>
     <label for="caution">Caution</label><br>
-    <input disabled type="number" name="caution" placeholder="Caution">
+    <input formControlName="caution" type="number" name="caution" placeholder="Caution">
     <button>+</button><button>-</button><br>
     <label for="conjuration">Conjuration</label><br>
-    <input disabled type="number" name="conjuration" placeholder="Conjuration">
+    <input formControlName="conjuration" type="number" name="conjuration" placeholder="Conjuration">
     <button>+</button><button>-</button><br>
 
     <br><br>

@@ -19,6 +19,7 @@ public class Character {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userId;
+    private Long gameId;
     private String name;
     @Enumerated(EnumType.STRING)
     private RacialLineage racialLineage;
@@ -54,9 +55,12 @@ public class Character {
     }
 
     public Character(CharacterDTO characterDTO) {
+
+
         //basic info
         setName(characterDTO.getName());
         setUserId(characterDTO.getUserId());
+        setGameId(characterDTO.getGameId());
         setRacialLineage(RacialLineage.valueOf(characterDTO.getRacialLineage().toUpperCase()));
         setCountry(Country.valueOf(characterDTO.getCountry().toUpperCase()));
         setProfession(Profession.valueOf(characterDTO.getProfession().toUpperCase()));
@@ -77,10 +81,11 @@ public class Character {
         setConjuration(characterDTO.getConjuration());
     }
 
-    public Character(Long userId, String name, RacialLineage racialLineage, Country country, Profession profession, int px, int physical, int skill, int mental, int social, int athletics, int knowledge, int interpretation, int perception, int caution, int conjuration) {
+    public Character(Long userId,Long gameId, String name, RacialLineage racialLineage, Country country, Profession profession, int px, int physical, int skill, int mental, int social, int athletics, int knowledge, int interpretation, int perception, int caution, int conjuration) {
         //basic info
         setName(name);
         setUserId(userId);
+        setGameId(gameId);
         setRacialLineage(racialLineage);
         setCountry(country);
         setProfession(profession);
@@ -99,6 +104,14 @@ public class Character {
         setPerception(perception);
         setCaution(caution);
         setConjuration(conjuration);
+    }
+
+    public Long getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 
     public Long getId() {

@@ -9,6 +9,7 @@ import { PlayerCharacterSheetComponent } from './components/player-character-she
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PlayerMainViewComponent } from './components/player-main-view/player-main-view.component';
 import { CreateCharacterSheetComponent } from './components/create-character-sheet/create-character-sheet.component';
+import { CreateGameComponent } from './components/create-game/create-game.component';
 
 const routes: Routes = [
 
@@ -26,6 +27,10 @@ const routes: Routes = [
 {
   path: "select-game",
   component: MainViewComponent
+},
+{
+  path: "create-game",
+  component: CreateGameComponent
 },
 {
   path: "game/:gameId/master/character-selection",

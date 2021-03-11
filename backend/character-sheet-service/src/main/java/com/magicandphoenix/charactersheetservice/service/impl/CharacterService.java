@@ -56,7 +56,7 @@ public class CharacterService implements ICharacterService {
         if(character.isEmpty()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Character with id " +id+ " not found");
         }{
-            character.get().setPx(pxDTO.getPx());
+            character.get().setPx(character.get().getPx() + pxDTO.getPx());
             characterRepository.save(character.get());
             return character.get();
         }

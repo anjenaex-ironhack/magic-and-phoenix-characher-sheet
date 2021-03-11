@@ -1,12 +1,19 @@
+import { Character } from "./character";
 import { User } from "./user";
 
 
 export class Game {
-    public get accessPassword(): string {
-        return this._accessPassword;
+    public get characterList(): Character[] {
+        return this._characterList;
     }
-    public set accessPassword(value: string) {
-        this._accessPassword = value;
+    public set characterList(value: Character[]) {
+        this._characterList = value;
+    }
+    public get token(): string {
+        return this._token;
+    }
+    public set token(value: string) {
+        this._token = value;
     }
     public get id(): number {
         return this._id;
@@ -35,12 +42,13 @@ export class Game {
     constructor(
         //MetaData
         private _id: number,
-        private _accessPassword: string,
+        private _token: string,
 
         //Basic info
         private _name: String,
         private _master: User,
-        private _userList: User[]
+        private _userList: User[],
+        private _characterList: Character[]
     ){
     }
 }

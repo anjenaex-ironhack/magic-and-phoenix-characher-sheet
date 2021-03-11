@@ -1,0 +1,20 @@
+<button type="submit" (click) = "goBack()">Go back</button>
+<h2>Name</h2>
+<button>Log out</button>
+
+<br><br>
+
+<form [formGroup]="form"  (ngSubmit)= "createGame(form)">
+    <label for="name" >Name</label><br>
+    <input formControlName = "name" type="text" name="name" placeholder="name"><br>
+    <p class="error-msg" *ngIf="nameField.hasError('required') && nameField.touched">Name is required</p>
+
+    <label for="token">Insert an access token here</label><br>
+    <input formControlName = "token" type="text" name="token" placeholder="token"><br>
+    <p class="error-msg" *ngIf="tokenField.hasError('required') && tokenField.touched">Token is required</p>
+    <p class="error-msg" *ngIf="tokenField.hasError('minlength')">Token must be at least 7 characters</p>
+
+
+    <br>
+    <button type="submit" [disabled] = "form.invalid">Create game</button>
+</form>

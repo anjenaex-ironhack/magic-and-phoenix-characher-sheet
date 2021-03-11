@@ -24,6 +24,7 @@ public class CharacterController implements ICharacterController {
     public CharacterDTO getCharacterById(@PathVariable Long id) {
         return characterService.getCharacterById(id);
     }
+
     @PostMapping("/character-sheet")
     @ResponseStatus(HttpStatus.CREATED)
     public Character createCharacter(@RequestBody @Valid CharacterDTO characterDTO) {

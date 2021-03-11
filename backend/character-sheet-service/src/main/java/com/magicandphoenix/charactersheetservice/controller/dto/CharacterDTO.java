@@ -11,12 +11,14 @@ import java.util.List;
 
 public class CharacterDTO {
 
+    //metadata
+    @NotEmpty
+    private Long userId;
+    @NotEmpty
+    private Long gameId;
 
     @NotEmpty
     private String name;
-
-    @NotEmpty
-    private Long userId;
 
     @NotEmpty
     private String racialLineage;
@@ -50,9 +52,13 @@ public class CharacterDTO {
     }
 
     public CharacterDTO(Character character){
+
+        //Metadata
+        setUserId(character.getUserId());
+        setGameId(character.getGameId());
+
         //basic info
         setName(character.getName());
-        setUserId(character.getUserId());
         setRacialLineage(character.getRacialLineage().toString());
         setCountry(character.getCountry().toString());
         setProfession(character.getProfession().toString());
@@ -163,6 +169,14 @@ public class CharacterDTO {
 
     public int getInterpretation() {
         return interpretation;
+    }
+
+    public Long getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 
     public void setInterpretation(int interpretation) {

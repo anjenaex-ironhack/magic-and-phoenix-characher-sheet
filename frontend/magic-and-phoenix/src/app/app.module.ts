@@ -15,6 +15,7 @@ import { MasterMainViewComponent } from './components/master-main-view/master-ma
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PlayerMainViewComponent } from './components/player-main-view/player-main-view.component';
 import { CreateCharacterSheetComponent } from './components/create-character-sheet/create-character-sheet.component';
+import { CreateGameComponent } from './components/create-game/create-game.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CreateCharacterSheetComponent } from './components/create-character-she
     MasterMainViewComponent,
     NotFoundComponent,
     PlayerMainViewComponent,
-    CreateCharacterSheetComponent
+    CreateCharacterSheetComponent,
+    CreateGameComponent
   ],
   imports: [
     BrowserModule,
