@@ -10,7 +10,7 @@ public class UserIdList {
     private Long id;
 
     @ManyToMany (mappedBy = "userIdList")
-    private List<Game> gameList;
+    private List<Game> gameWithListDTOList;
 
     public UserIdList() {
     }
@@ -28,10 +28,10 @@ public class UserIdList {
     }
 
     public List<Game> getGameList() {
-        return gameList;
+        return gameWithListDTOList;
     }
 
-    public void setGameList(List<Game> gameList) {
-        this.gameList = gameList;
+    public void setGameList(List<Game> gameWithListDTOList) {
+        this.gameWithListDTOList = gameWithListDTOList;
     }
 }

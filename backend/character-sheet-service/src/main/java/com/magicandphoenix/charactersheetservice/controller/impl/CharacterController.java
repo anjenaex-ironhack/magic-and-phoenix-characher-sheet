@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import com.magicandphoenix.charactersheetservice.model.Character;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -19,30 +20,36 @@ public class CharacterController implements ICharacterController {
     @Autowired
     private ICharacterService characterService;
 
-    @GetMapping("/character-sheet/{id}")
+    @GetMapping("/character{id}")
     @ResponseStatus(HttpStatus.OK)
     public CharacterDTO getCharacterById(@PathVariable Long id) {
         return characterService.getCharacterById(id);
     }
 
-    @PostMapping("/character-sheet")
+    @GetMapping("characters/game/{gameId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CharacterDTO> getCharacterListByGameId(@PathVariable Long gameId) {
+        return characterService.getCharacterListByGameId(gameId);
+    }
+
+    @PostMapping("/character")
     @ResponseStatus(HttpStatus.CREATED)
     public Character createCharacter(@RequestBody @Valid CharacterDTO characterDTO) {
         return characterService.createCharacter(characterDTO);
     }
 
-    @PutMapping("/character-sheet/{id}")
+    @PutMapping("/character/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Character upgradeCharacterById(@PathVariable Long id, @RequestBody @Valid CharacterDTO characterDTO) {
         return characterService.upgradeCharacterById(id, characterDTO);
     }
 
-    @PatchMapping("/character-sheet/px/{id}")
+    @PatchMapping("/character/px/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Character updatePxById(@PathVariable Long id, @RequestBody @Valid PxDTO pxDTO) {
         return characterService.updatePxById(id, pxDTO);
     }
-    @DeleteMapping("/character-sheet/{id}")
+    @DeleteMapping("/character/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCharacter(@PathVariable Long id) {
         characterService.deleteCharacter(id);
