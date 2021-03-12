@@ -1,41 +1,49 @@
-drop schema game;
-create schema game;
-use game;
+DROP SCHEMA game;
+CREATE SCHEMA game;
+USE game;
 
-create table game (
+CREATE TABLE game (
 id BIGINT AUTO_INCREMENT,
-name varchar(255),
-master_id bigint,
+name VARCHAR(255),
+master_id BIGINT,
 PRIMARY KEY(id)
 );
 
-create table user_id_list(
+CREATE TABLE user_id(
 id BIGINT,
 PRIMARY KEY(id)
 );
 
-create table game_has_user_list(
-game_id bigint,
-user_id bigint,
-PRIMARY KEY(game_id, user_id)
+CREATE TABLE game_has_user_list(
+game_id BIGINT,
+user_id BIGINT,
+PRIMARY KEY(game_id, user_id),
+FOREIGN KEY(game_id) REFERENCES game(id),
+FOREIGN KEY(user_id) REFERENCES user_id(id)
 );
 
-insert into game (name, master_id) values 
+INSERT INTO game (name, master_id) VALUES 
 ('La partida de TartKross', 1),
 ('La partida de Taro Korosu', 1),
 ('La partida de España', 2);
 
-insert into user_id_list (id) values
+INSERT INTO user_id (id) VALUES
 (1),
 (2),
 (3),
 (4),
 (5);
 
-insert into game_has_user_list (game_id, user_id) values
+INSERT INTO game_has_user_list (game_id, user_id) VALUES
 (1, 1),
 (1, 2),
 (1, 3),
 (1, 4),
 (3, 1),
 (3, 5);
+
+SELECT * FROM game;
+
+SELECT DISTINCT name, master_id FROM game g 
+			  JOIN game_has_user_list user_list ON g.id = user_list.game_id
+              WHERE user_list.user_id = 1;

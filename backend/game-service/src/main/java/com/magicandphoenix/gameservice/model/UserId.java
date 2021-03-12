@@ -5,19 +5,17 @@ import java.util.List;
 
 
 @Entity
-public class UserIdList {
+public class UserId {
 
+    @Id
     private Long id;
 
     @ManyToMany (mappedBy = "userIdList")
     private List<Game> gameWithListDTOList;
 
-    public UserIdList() {
+    public UserId() {
     }
 
-    public UserIdList(Long id) {
-        setId(id);
-    }
 
     public Long getId() {
         return id;

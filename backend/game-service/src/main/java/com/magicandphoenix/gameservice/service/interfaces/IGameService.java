@@ -12,7 +12,8 @@ public interface IGameService {
     //===============================
     //Get Methods
     //===============================
-    List<GameDTO> getGameListByUserId(Long userId);
+    List<GameDTO> getGameListByUserId(Long id);
+    List<GameDTO> getGameListByMasterId(Long id);
     List<GameDTO> gameList();
     List<GameDTO> getGameListByName(String name);
     GameDTO getGameById(Long id);

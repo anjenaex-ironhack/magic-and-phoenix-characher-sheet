@@ -20,12 +20,22 @@ public class GameService implements IGameService {
     @Autowired
     private GameRepository gameRepository;
 
-
-    public List<GameDTO> getGameListByUserId(Long userId) {
+    public List<GameDTO> getGameListByUserId(Long id) {
 
         List<GameDTO> gameDTOList = new ArrayList<>();
 
-        for( Game game: gameRepository.findByUserId(userId)){
+        for( Game game: gameRepository.findGameByUserId(id)){
+            GameDTO gameDTO =  new GameDTO(game.getName(), game.getMasterId());
+            gameDTOList.add(gameDTO);
+        }
+
+        return gameDTOList;
+    }
+
+    public List<GameDTO> getGameListByMasterId(Long id) {
+        List<GameDTO> gameDTOList = new ArrayList<>();
+
+        for( Game game: gameRepository.findByMasterId(id)){
             GameDTO gameDTO =  new GameDTO(game.getName(), game.getMasterId());
             gameDTOList.add(gameDTO);
         }
@@ -60,7 +70,7 @@ public class GameService implements IGameService {
 
     public GameDTO getGameById(Long id) {
 
-        if(gameRepository.findByUserId(id).isEmpty()) {
+        if(gameRepository.findById(id).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "game with id " + id + " not found");
         }else{
             Game game = gameRepository.findById(id).get();

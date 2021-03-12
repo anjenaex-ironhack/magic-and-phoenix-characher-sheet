@@ -12,10 +12,11 @@ public interface IGameController {
     //===============================
     //Get Methods
     //===============================
-    List<GameWithListsDTO> getGameListByUserId(Long userId);
-    List<GameWithListsDTO> gameList();
-    List<GameWithListsDTO> getGameListByName(String name);
     GameDTO getGameById(Long id);
+    List<GameDTO> gameList();
+    List<GameWithListsDTO> getGameListByName(String name);
+    List<GameDTO> getGameListByUserId(Long id);
+    List<GameDTO> getGameListByMasterId(Long id);
 
 
     //===============================

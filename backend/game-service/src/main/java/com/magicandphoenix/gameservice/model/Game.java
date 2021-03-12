@@ -20,7 +20,7 @@ public class Game {
             joinColumns = { @JoinColumn(name = "game_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")}
     )
-    private List<UserIdList> userIdList;
+    private List<UserId> userIdList;
 
 
     public Game() {
@@ -31,7 +31,7 @@ public class Game {
         setMasterId(masterId);
     }
 
-    public Game(String name, Long masterId, List<UserIdList> userIdList) {
+    public Game(String name, Long masterId, List<UserId> userIdList) {
         setName(name);
         setMasterId(masterId);
         setUserIdList(userIdList);
@@ -61,11 +61,11 @@ public class Game {
         this.masterId = masterId;
     }
 
-    public List<UserIdList> getUserIdList() {
+    public List<UserId> getUserIdList() {
         return userIdList;
     }
 
-    public void setUserIdList(List<UserIdList> userIdList) {
+    public void setUserIdList(List<UserId> userIdList) {
         this.userIdList = userIdList;
     }
 

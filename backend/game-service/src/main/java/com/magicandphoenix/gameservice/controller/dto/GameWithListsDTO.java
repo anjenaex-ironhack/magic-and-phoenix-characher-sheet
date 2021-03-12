@@ -1,11 +1,7 @@
 package com.magicandphoenix.gameservice.controller.dto;
 
-import com.magicandphoenix.gameservice.model.UserIdList;
-import reactor.util.annotation.NonNull;
+import com.magicandphoenix.gameservice.model.UserId;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
@@ -17,6 +13,6 @@ public class GameWithListsDTO {
     private String name;
     @NotEmpty
     private Long masterId;
-    private List<UserIdList> userIdList;
+    private List<UserId> userId;
 
 }
