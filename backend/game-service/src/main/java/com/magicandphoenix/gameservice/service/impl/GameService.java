@@ -30,7 +30,7 @@ public class GameService implements IGameService {
         List<GameDTO> gameDTOList = new ArrayList<>();
 
         for( Game game: gameRepository.findGameByUserId(id)){
-            GameDTO gameDTO =  new GameDTO(game.getName(), game.getMasterId());
+            GameDTO gameDTO =  new GameDTO(game);
             gameDTOList.add(gameDTO);
         }
 
@@ -41,7 +41,7 @@ public class GameService implements IGameService {
         List<GameDTO> gameDTOList = new ArrayList<>();
 
         for( Game game: gameRepository.findByMasterId(id)){
-            GameDTO gameDTO =  new GameDTO(game.getName(), game.getMasterId());
+            GameDTO gameDTO =  new GameDTO(game);
             gameDTOList.add(gameDTO);
         }
 
@@ -53,7 +53,7 @@ public class GameService implements IGameService {
         List<GameDTO> gameDTOList = new ArrayList<>();
 
         for( Game game: gameRepository.findAll()){
-            GameDTO gameDTO =  new GameDTO(game.getName(), game.getMasterId());
+            GameDTO gameDTO =  new GameDTO(game);
             gameDTOList.add(gameDTO);
         }
 
@@ -65,7 +65,7 @@ public class GameService implements IGameService {
         List<GameDTO> gameDTOList = new ArrayList<>();
 
         for( Game game: gameRepository.findByName(name)){
-            GameDTO gameDTO =  new GameDTO(game.getName(), game.getMasterId());
+            GameDTO gameDTO =  new GameDTO(game);
             gameDTOList.add(gameDTO);
         }
 
@@ -79,18 +79,18 @@ public class GameService implements IGameService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "game with id " + id + " not found");
         }else{
             Game game = gameRepository.findById(id).get();
-            GameDTO gameDTO = new GameDTO(game.getName(), game.getMasterId());
+            GameDTO gameDTO = new GameDTO(game);
             return gameDTO;
         }
     }
 
 
-    public Game createGame(GameDTO gameDTO) {
+    public GameDTO createGame(GameDTO gameDTO) {
 
         Game game = new Game(gameDTO);
         gameRepository.save(game);
 
-        return game;
+        return gameDTO;
     }
 
     public Game addNewPlayer(Long gameId, UserDTO userDTO) {

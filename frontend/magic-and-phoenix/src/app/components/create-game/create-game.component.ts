@@ -44,12 +44,19 @@ export class CreateGameComponent implements OnInit {
 
   createGame(form: FormGroup): void {
 
-    const game =  new GameDTO (form.value.name, form.value.token, this.userId);
+    const game =  {
+      name: form.value.name,
+      masterId: this.userId,
+      token: form.value.token
+    };
 
     this.gameService.createGame(game).subscribe(resp => {
       console.log(resp);
     })
+
+    alert(`token generated: ${form.value.token}`)
     
+    this.router.navigateByUrl("select-game");
   }
 
 }

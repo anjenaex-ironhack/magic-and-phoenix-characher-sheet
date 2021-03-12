@@ -14,6 +14,7 @@ public class Game {
     private Long id;
     private String name;
     private Long masterId;
+    private String token;
 
     @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable(
@@ -30,16 +31,19 @@ public class Game {
     public Game(GameDTO gameDTO){
         setName(gameDTO.getName());
         setMasterId(gameDTO.getMasterId());
+        setToken(gameDTO.getToken());
     }
 
-    public Game(String name, Long masterId) {
+    public Game(String name, Long masterId, String token) {
         setName(name);
         setMasterId(masterId);
+        setToken(token);
     }
 
-    public Game(String name, Long masterId, List<UserId> userIdList) {
+    public Game(String name, Long masterId,String token,  List<UserId> userIdList) {
         setName(name);
         setMasterId(masterId);
+        setToken(token);
         setUserIdList(userIdList);
     }
 
@@ -53,6 +57,14 @@ public class Game {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public void setId(Long id) {

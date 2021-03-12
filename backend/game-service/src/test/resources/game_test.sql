@@ -6,6 +6,7 @@ CREATE TABLE game (
 id BIGINT AUTO_INCREMENT,
 name VARCHAR(255),
 master_id BIGINT,
+token varchar(255),
 PRIMARY KEY(id)
 );
 

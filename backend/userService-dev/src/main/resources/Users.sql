@@ -1,0 +1,3 @@
+drop schema users_from_magic_and_phoenix_app;
+create schema users_from_magic_and_phoenix_app;
+use users_from_magic_and_phoenix_app;

@@ -21,7 +21,7 @@ public interface IGameService {
     //===============================
     //Post Methods
     //===============================
-    Game createGame(GameDTO gameDTO);
+    GameDTO createGame(GameDTO gameDTO);
 
     //===============================
     //Patch Methods

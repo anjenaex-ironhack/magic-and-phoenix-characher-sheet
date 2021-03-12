@@ -3,12 +3,7 @@ import { User } from "./user";
 
 
 export class Game {
-    public get characterList(): Character[] {
-        return this._characterList;
-    }
-    public set characterList(value: Character[]) {
-        this._characterList = value;
-    }
+    
     public get token(): string {
         return this._token;
     }
@@ -47,8 +42,7 @@ export class Game {
         //Basic info
         private _name: String,
         private _master: User,
-        private _userList: User[],
-        private _characterList: Character[]
+        private _userList: User[]
     ){
     }
 }

@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.PATCH})
 public class GameController implements IGameController {
 
     @Autowired
@@ -66,7 +67,7 @@ public class GameController implements IGameController {
     //Create a new game
     @PostMapping("game")
     @ResponseStatus(HttpStatus.CREATED)
-    public Game createGame(@RequestBody GameDTO gameDTO) {
+    public GameDTO createGame(@RequestBody GameDTO gameDTO) {
         return gameService.createGame(gameDTO);
     }
 

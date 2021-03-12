@@ -5,11 +5,11 @@ export class User {
     public set id(value: number) {
         this._id = value;
     }
-    public get nombre(): string {
-        return this._nombre;
+    public get name(): string {
+        return this._name;
     }
-    public set nombre(value: string) {
-        this._nombre = value;
+    public set name(value: string) {
+        this._name = value;
     }
     public get password(): string {
         return this._password;
@@ -28,7 +28,7 @@ export class User {
     constructor(
 
         private _id: number,
-        private _nombre: string,
+        private _name: string,
         private _email: string,
         private _password: string
     ){

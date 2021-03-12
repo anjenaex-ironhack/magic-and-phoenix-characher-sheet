@@ -1,17 +1,38 @@
-<h2>Name</h2>
+<h2>{{name}}</h2>
 <button>Log out</button>
 
 <br><br>
 
 <h2>Select a game</h2>
+<h3>You are the master</h3>
 
 <ul>
-    <li *ngFor="let game of gameList; let index = index">Name of the game</li>
+    <li *ngFor="let game of gameListAsMaster; let index = index">{{game.name}} -- {{game.masterId}}</li>
 </ul>
 
-<form [formGroup]="form" (ngSubmit)="joinGame(form)">
-    <input formControlName="token" type="text" name="token" placeholder="Insert your access token here">
-    <button type="submit" [disabled]="form.invalid" >Join Game</button>
+<h3>You are a player</h3>
+
+<ul>
+    <li *ngFor="let game of gameListAsPlayer; let index = index">{{game.name}} -- {{game.masterId}}</li>
+</ul>
+
+<h2>Find your game</h2>
+<form [formGroup] = "findGameForm" (ngSubmit)="findGameToJoin(findGameForm)">
+    <input formControlName="name" type="text" name="findGame" placeholder="find your game">
+    <button type="submit" [disabled]="findGameForm.invalid" >Find game</button>
 </form>
 <br>
+
+<ul>
+    <li *ngFor="let game of gameListToJoin; let index = index">
+        <form [formGroup]="form" (ngSubmit)="joinGame(form, index)">
+            <span>{{game.name}} -- {{game.masterId}} </span>
+            <input formControlName="token" type="text" name="token" placeholder="Insert your access token here">
+            <button type="submit" [disabled]="form.invalid" >Join Game</button>
+        </form>
+    </li>
+</ul>
+
+
+<h2>Create a new game</h2>
 <button type="submit" (click) = 'goToCreateGame()' >Create New game</button>

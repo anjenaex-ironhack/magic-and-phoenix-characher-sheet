@@ -1,4 +1,10 @@
 export class GameDTO {
+    public get id(): number {
+        return this._id;
+    }
+    public set id(value: number) {
+        this._id = value;
+    }
     public get masterId(): number {
         return this._masterId;
     }
@@ -20,9 +26,10 @@ export class GameDTO {
 
 
     constructor(
+        private _id: number,
         private _name: string,
-        private _token: string,
-        private _masterId: number
+        private _masterId: number,
+        private _token: string
     ){
 
     }

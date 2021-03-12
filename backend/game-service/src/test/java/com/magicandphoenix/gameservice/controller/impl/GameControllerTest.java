@@ -51,7 +51,7 @@ class GameControllerTest {
         userIdRepository.saveAll(List.of(AntonioId, RomuId, VillaId, ElifId));
 
         //The name of the master 1 is Nacho
-        Game tartKrossGame = new Game("Partida de TartKross", 1L);
+        Game tartKrossGame = new Game("Partida de TartKross", 1L, "ABC");
         List<UserId> tartKrossUserList = new ArrayList<>();
         tartKrossUserList.add(AntonioId);
         tartKrossUserList.add(RomuId);
@@ -59,10 +59,10 @@ class GameControllerTest {
         tartKrossGame.setUserIdList(tartKrossUserList);
 
         //The name of the master 1 is Nacho
-        Game taroKorosuGame = new Game("Partida de Taro Korosu", 1L);
+        Game taroKorosuGame = new Game("Partida de Taro Korosu", 1L, "ABC");
 
         //The name of the master 1 is Villa
-        Game samirGame = new Game("Partida de Samir", 2L);
+        Game samirGame = new Game("Partida de Samir", 2L, "ABC");
         List<UserId> samirUserList = new ArrayList<>();
         samirUserList.add(AntonioId);
         samirUserList.add(ElifId);
@@ -147,7 +147,7 @@ class GameControllerTest {
 
     @Test
     void createGame() throws Exception {
-        Game game = new Game("Partida de la leyenda de los 5 anillos", 3L);
+        Game game = new Game("Partida de la leyenda de los 5 anillos", 3L, "ABC");
         String body = objectMapper.writeValueAsString(game);
         MvcResult result = mockMvc.perform(post("/game")
                 .content(body)

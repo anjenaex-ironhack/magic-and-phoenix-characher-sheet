@@ -22,7 +22,7 @@ public interface IGameController {
     //===============================
     //Post Methods
     //===============================
-    Game createGame(GameDTO gameDTO);
+    GameDTO createGame(GameDTO gameDTO);
 
     //===============================
     //Patch Methods
