@@ -20,35 +20,62 @@ public class CharacterController implements ICharacterController {
     @Autowired
     private ICharacterService characterService;
 
-    @GetMapping("/character{id}")
+    //=======================================
+    // Get Methods
+    //=======================================
+
+    //Get a character by id
+    @GetMapping("/character/{id}")
     @ResponseStatus(HttpStatus.OK)
     public CharacterDTO getCharacterById(@PathVariable Long id) {
         return characterService.getCharacterById(id);
     }
 
+    //Get a character list by gameId
     @GetMapping("characters/game/{gameId}")
     @ResponseStatus(HttpStatus.OK)
     public List<CharacterDTO> getCharacterListByGameId(@PathVariable Long gameId) {
         return characterService.getCharacterListByGameId(gameId);
     }
 
+    //=======================================
+    // Post Methods
+    //=======================================
+
+    //Create a new Character
     @PostMapping("/character")
     @ResponseStatus(HttpStatus.CREATED)
     public Character createCharacter(@RequestBody @Valid CharacterDTO characterDTO) {
         return characterService.createCharacter(characterDTO);
     }
 
+    //=======================================
+    // Put Methods
+    //=======================================
+
+    //Update any field from a character by id
     @PutMapping("/character/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Character upgradeCharacterById(@PathVariable Long id, @RequestBody @Valid CharacterDTO characterDTO) {
         return characterService.upgradeCharacterById(id, characterDTO);
     }
 
+    //=======================================
+    // Patch Methods
+    //=======================================
+
+    //Update the px field from a character by id
     @PatchMapping("/character/px/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Character updatePxById(@PathVariable Long id, @RequestBody @Valid PxDTO pxDTO) {
         return characterService.updatePxById(id, pxDTO);
     }
+
+    //=======================================
+    // Delete Methods
+    //=======================================
+
+    //Delete a character
     @DeleteMapping("/character/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCharacter(@PathVariable Long id) {

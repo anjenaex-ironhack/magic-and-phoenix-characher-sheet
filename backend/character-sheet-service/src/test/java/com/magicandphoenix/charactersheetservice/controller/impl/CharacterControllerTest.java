@@ -66,13 +66,13 @@ class CharacterControllerTest {
         List<Character> characterList = characterRepository.findAll();
 
         Long samirId = characterList.get(0).getId();
-        MvcResult result = mockMvc.perform(get("/character-sheet/"+samirId))
+        MvcResult result = mockMvc.perform(get("/character/"+samirId))
                           .andExpect(status().isOk()).andReturn();
         assertTrue(result.getResponse().getContentAsString().contains("Samir Al-Khamid"));
         assertFalse(result.getResponse().getContentAsString().contains("Francisco Abascal"));
 
         Long SantiagoId = characterList.get(1).getId();
-        MvcResult result2 = mockMvc.perform(get("/character-sheet/"+SantiagoId))
+        MvcResult result2 = mockMvc.perform(get("/character/"+SantiagoId))
                 .andExpect(status().isOk()).andReturn();
 
         assertTrue(result2.getResponse().getContentAsString().contains("Francisco Abascal"));
@@ -83,10 +83,9 @@ class CharacterControllerTest {
     void createCharacter() throws Exception {
         Character TartKross = new Character(1L,1L,  "TartKross", RacialLineage.LORANÄE, Country.BRITEN, Profession.DOCTOR, 450,
                 7,7,10,8,5,5,4,3,3,0);
-
         String body = objectMapper.writeValueAsString((TartKross));
         MvcResult result = mockMvc.perform(
-                post("/character-sheet")
+                post("/character")
                 .content(body)
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isCreated()).andReturn();
@@ -104,7 +103,7 @@ class CharacterControllerTest {
         String body = objectMapper.writeValueAsString(nuevoSamir);
 
         mockMvc.perform(
-                put("/character-sheet/"+samirId)
+                put("/character/"+samirId)
                     .content(body)
                     .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isAccepted()).andReturn();
@@ -117,16 +116,16 @@ class CharacterControllerTest {
     void updatePxById() throws Exception {
         List<Character> characterList = characterRepository.findAll();
         Long samirId = characterList.get(0).getId();
-        PxDTO newPx = new PxDTO(88);
+        PxDTO newPx = new PxDTO(1);
         String body = objectMapper.writeValueAsString(newPx);
         MvcResult result = mockMvc.perform(
-                patch("/character-sheet/px/"+samirId)
+                patch("/character/px/"+samirId)
                     .content(body)
                     .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isAccepted()).andReturn();
 
-        assertTrue(result.getResponse().getContentAsString().contains("88"));
-        assertEquals(88, characterRepository.findById(samirId).get().getPx());
+        assertTrue(result.getResponse().getContentAsString().contains("46"));
+        assertEquals(46, characterRepository.findById(samirId).get().getPx());
     }
 
     @Test
@@ -136,7 +135,7 @@ class CharacterControllerTest {
         //Show that a character with an specific id exist
         assertEquals("Samir Al-Khamid", characterRepository.findById(samirId).get().getName());
         MvcResult result = mockMvc.perform(
-                delete("/character-sheet/" + samirId))
+                delete("/character/" + samirId))
                 .andExpect(status().isNoContent()).andReturn();
         assertEquals(1, characterRepository.findAll().size());
 

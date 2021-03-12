@@ -12,9 +12,9 @@ import java.util.List;
 public class CharacterDTO {
 
     //metadata
-    @NotEmpty
+    @NotNull
     private Long userId;
-    @NotEmpty
+    @NotNull
     private Long gameId;
 
     @NotEmpty
