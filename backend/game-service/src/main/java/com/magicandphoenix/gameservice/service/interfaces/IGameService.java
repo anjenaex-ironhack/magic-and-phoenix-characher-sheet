@@ -26,7 +26,7 @@ public interface IGameService {
     //===============================
     //Patch Methods
     //===============================
-    Game addNewPlayer(UserDTO userDTO);
+    Game addNewPlayer(Long gameId, UserDTO userDTO);
 
     //===============================
     //Put Methods
@@ -35,5 +35,6 @@ public interface IGameService {
     //===============================
     //Delete Methods
     //===============================
+    void deleteGame(Long gameId);
 
 }

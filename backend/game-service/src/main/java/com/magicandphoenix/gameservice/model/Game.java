@@ -1,5 +1,6 @@
 package com.magicandphoenix.gameservice.model;
 
+import com.magicandphoenix.gameservice.controller.dto.GameDTO;
 import org.apache.catalina.User;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ public class Game {
     private String name;
     private Long masterId;
 
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable(
             name="game_has_user_list",
             joinColumns = { @JoinColumn(name = "game_id")},
@@ -24,6 +25,11 @@ public class Game {
 
 
     public Game() {
+    }
+
+    public Game(GameDTO gameDTO){
+        setName(gameDTO.getName());
+        setMasterId(gameDTO.getMasterId());
     }
 
     public Game(String name, Long masterId) {

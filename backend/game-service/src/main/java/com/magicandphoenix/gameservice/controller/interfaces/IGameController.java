@@ -14,7 +14,7 @@ public interface IGameController {
     //===============================
     GameDTO getGameById(Long id);
     List<GameDTO> gameList();
-    List<GameWithListsDTO> getGameListByName(String name);
+    List<GameDTO> getGameListByName(String name);
     List<GameDTO> getGameListByUserId(Long id);
     List<GameDTO> getGameListByMasterId(Long id);
 
@@ -27,7 +27,7 @@ public interface IGameController {
     //===============================
     //Patch Methods
     //===============================
-    Game addNewPlayer(UserDTO userDTO);
+    Game addNewPlayer(Long gameId, UserDTO userDTO);
 
     //===============================
     //Put Methods
@@ -36,5 +36,6 @@ public interface IGameController {
     //===============================
     //Delete Methods
     //===============================
+    void deleteGame(Long gameId);
 
 }

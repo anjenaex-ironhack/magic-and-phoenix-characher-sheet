@@ -1,5 +1,7 @@
 package com.magicandphoenix.gameservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,12 +12,16 @@ public class UserId {
     @Id
     private Long id;
 
-    @ManyToMany (mappedBy = "userIdList")
-    private List<Game> gameWithListDTOList;
+//    @ManyToMany (mappedBy = "userIdList")
+//    @JsonIgnore
+//    private List<Game> gameWithListDTOList;
 
     public UserId() {
     }
 
+    public UserId(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;
@@ -25,11 +31,4 @@ public class UserId {
         this.id = id;
     }
 
-    public List<Game> getGameList() {
-        return gameWithListDTOList;
-    }
-
-    public void setGameList(List<Game> gameWithListDTOList) {
-        this.gameWithListDTOList = gameWithListDTOList;
-    }
 }
