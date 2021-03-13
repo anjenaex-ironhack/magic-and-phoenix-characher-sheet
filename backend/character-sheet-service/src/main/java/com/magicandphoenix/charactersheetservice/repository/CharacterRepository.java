@@ -12,4 +12,5 @@ import java.util.List;
 public interface CharacterRepository extends JpaRepository<Character, Long> {
 
     List<Character> findByGameId(Long gameId);
+    List<Character> findByGameIdAndUserId(Long gameId, Long userId);
 }

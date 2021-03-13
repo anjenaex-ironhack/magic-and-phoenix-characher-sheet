@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Character } from 'src/app/models/character';
 import { CharacterService } from '../../services/character.service';
 
@@ -11,28 +11,34 @@ import { CharacterService } from '../../services/character.service';
 })
 export class PlayerMainViewComponent implements OnInit {
 
-  characterList: Character[] = []
+  name: string = "Antonio";
+  gameId: string | null = this.activatedRoute.snapshot.paramMap.get('gameId');
+  userId: number = 1;
+
+  characterList: Character[] = [];
+
 
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private characterServcie: CharacterService
   ) { }
 
   ngOnInit(): void {
-    //meter un this.showCharacterList to molon aqui
+    this.showCharacterList();
   }
-
-  goToCreateCharacter(): void {
-    this.router.navigateByUrl("game/:gameId/character/create")
-  }
+  
   //go back to main-view
   goBack(): void {
     this.router.navigateByUrl("select-game");
   }
 
-  //give info to the characterList propertie
+  //give info to the characterList properties
   showCharacterList(): void {
-
+    const checkHasGameId: boolean = this.activatedRoute.snapshot.paramMap.has('gameId');
+       this.characterServcie.getPlayerCharacterList(this.gameId, this.userId).subscribe(resp => {
+      this.characterList = resp;
+    });
   }
 
   selectCharacter(): void {

@@ -140,4 +140,33 @@ class CharacterControllerTest {
         assertEquals(1, characterRepository.findAll().size());
 
     }
+
+    @Test
+    void getCharacterListByGameIdAndUserId() throws Exception {
+        mockMvc.perform(
+                get("/characters/game/1/player/1"))
+                .andExpect(status().isOk()).andReturn();
+        assertEquals(1, characterRepository.findByGameIdAndUserId(1L,1L).size());
+
+        Character TartKross = new Character(1L,1L,  "TartKross", RacialLineage.LORANÄE, Country.BRITEN, Profession.DOCTOR, 450,
+                7,7,10,8,5,5,4,3,3,0);
+
+        characterRepository.save(TartKross);
+
+        mockMvc.perform(
+                get("/characters/game/1/player/1"))
+                .andExpect(status().isOk()).andReturn();
+        assertEquals(2, characterRepository.findByGameIdAndUserId(1L,1L).size());
+
+        Character TartKrossDifferentGame = new Character(1L,2L,  "TartKross", RacialLineage.LORANÄE, Country.BRITEN, Profession.DOCTOR, 450,
+                7,7,10,8,5,5,4,3,3,0);
+
+        characterRepository.save(TartKrossDifferentGame);
+
+        mockMvc.perform(
+                get("/characters/game/1/player/1"))
+                .andExpect(status().isOk()).andReturn();
+        assertEquals(2, characterRepository.findByGameIdAndUserId(1L,1L).size());
+
+    }
 }

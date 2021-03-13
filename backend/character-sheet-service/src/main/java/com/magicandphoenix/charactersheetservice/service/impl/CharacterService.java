@@ -50,6 +50,17 @@ public class CharacterService implements ICharacterService {
         return characterDTOList;
     }
 
+    public List<CharacterDTO> getCharacterListByGameIdAndUserId(Long gameId, Long userId) {
+        List<CharacterDTO> characterDTOList = new ArrayList<>();
+
+        for(Character character: characterRepository.findByGameIdAndUserId(gameId, userId)) {
+            CharacterDTO characterDTO =  new CharacterDTO(character);
+            characterDTOList.add(characterDTO);
+        }
+
+        return characterDTOList;
+    }
+
 
     public Character createCharacter(CharacterDTO characterDTO) {
 

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Game } from 'src/app/models/game';
+import { Character } from '../../interfaces/character';
+import { CharacterService } from '../../services/character.service';
 
 @Component({
   selector: 'app-create-character-sheet',
@@ -11,8 +13,9 @@ import { Game } from 'src/app/models/game';
 export class CreateCharacterSheetComponent implements OnInit {
 
   //MetaData
-  gameId: Game[] = [];
-  px: number = 0;
+  gameId: string | null = this.activatedRoute.snapshot.paramMap.get('gameId');
+  userId: number = 1; 
+  px: number = 40;
 
   form: FormGroup;
 
@@ -37,7 +40,9 @@ export class CreateCharacterSheetComponent implements OnInit {
 
   //Hay que quitarle el tipo a todos los inputs y meterle una validacion para que solo acepte numeros
   constructor(
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private characterService: CharacterService
   ) {
     this.userField = new FormControl('', [Validators.required])
     this.nameField = new FormControl('', [Validators.required])
@@ -82,10 +87,6 @@ export class CreateCharacterSheetComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  goBack(): void {
-    this.router.navigateByUrl("game/:gameId/character-selection");
-  }
-
   increaseAttribute():void {
 
   }
@@ -103,10 +104,35 @@ export class CreateCharacterSheetComponent implements OnInit {
 
   createCharacter(form: FormGroup): void {
 
-    //rellenar characterDTO con los datos del formulario
-    //Enviar en una ruta post los datos del formulario
-    //llamar a showCharacterList, para actualizar lista
-    //devolver los datos a main-view
+    let gameId: number = 0;
+
+    if(this.gameId != null){
+      gameId = parseInt(this.gameId.valueOf());
+    }
+
+    let character = {
+      userId:         this.userId,
+      gameId:         gameId,
+      name:           form.value.name,
+      racialLineage:  form.value.racialLineage.toUpperCase(),
+      country:        form.value.country.toUpperCase(),
+      profession:     form.value.profession.toUpperCase(),
+      px:             this.px,
+      physical:       form.value.physical,
+      skill:          form.value.skill,
+      mental:         form.value.mental,
+      social:         form.value.social,
+      athletics:      form.value.athletics,
+      knowledge:      form.value.knowledge,
+      interpretation: form.value.interpretation,
+      perception:     form.value.perception,
+      caution:        form.value.caution,
+      conjuration:    form.value.conjuration
+    }
+
+    this.characterService.createCharacter(character).subscribe(resp => {
+      console.log(resp)
+    })
 
   }
 }

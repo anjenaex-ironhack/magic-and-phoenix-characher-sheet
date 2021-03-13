@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin("**")
+@CrossOrigin(origins = "*",  methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.PATCH})
 public class CharacterController implements ICharacterController {
 
     @Autowired
@@ -37,6 +37,12 @@ public class CharacterController implements ICharacterController {
     @ResponseStatus(HttpStatus.OK)
     public List<CharacterDTO> getCharacterListByGameId(@PathVariable Long gameId) {
         return characterService.getCharacterListByGameId(gameId);
+    }
+
+    @GetMapping("characters/game/{gameId}/player/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CharacterDTO> getCharacterListByGameIdAndUserId(@PathVariable Long gameId, @PathVariable Long userId) {
+        return characterService.getCharacterListByGameIdAndUserId(gameId, userId);
     }
 
     //=======================================

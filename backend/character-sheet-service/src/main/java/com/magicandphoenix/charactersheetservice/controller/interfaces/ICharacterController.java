@@ -13,6 +13,8 @@ public interface ICharacterController {
     CharacterDTO getCharacterById(Long id);
     //Get Method
     List<CharacterDTO> getCharacterListByGameId(Long gameId);
+    //Get Method
+    List<CharacterDTO> getCharacterListByGameIdAndUserId(Long gameId, Long userId);
     //Post Method
     Character createCharacter(CharacterDTO characterDTO);
     //Put Method

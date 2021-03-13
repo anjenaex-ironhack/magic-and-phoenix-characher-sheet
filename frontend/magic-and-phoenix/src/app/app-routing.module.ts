@@ -23,7 +23,7 @@ const routes: Routes = [
   path: "register",
   component: RegisterComponent
 },
-  //This patch show the games of a player, also the posibility to create a new one
+  //This patch show the games of the user, also the posibility to create a new one
 {
   path: "select-game",
   component: MainViewComponent
@@ -34,7 +34,8 @@ const routes: Routes = [
 },
 {
   path: "game/:gameId/master/character-selection",
-  component: MasterMainViewComponent
+  component: MasterMainViewComponent,
+  pathMatch: 'full'
 },
 //This patch show a character sheet to the master, and can be edited
 {

@@ -1,5 +1,5 @@
 <button type="submit" (click)="goBack()">go back</button>
-<h2>Name</h2>
+<h2>{{name}}</h2>
 <button>Log out</button>
 
 <br><br>
@@ -7,9 +7,10 @@
 <h2>Select a Character</h2>
 
 <ul>
-    <!-- <li *ngFor="let character of characterList; let index = index">Name of the game</li> -->
-    <li>character 1</li>
-    <li>character 2</li>
+    <li *ngFor="let character of characterList; let index = index">{{character.name}}</li> 
 </ul>
 
-<button type="submit" (click)="goToCreateCharacter()">Create New Character</button>
+<button type="submit" 
+        [routerLink] = "['/game',gameId, 'character','create']">
+            Create New Character
+</button>

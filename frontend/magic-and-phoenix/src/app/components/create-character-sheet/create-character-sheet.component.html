@@ -1,4 +1,4 @@
-<button (click) = "goBack()">go back</button>
+<button [routerLink]="['/game',gameId,'character-selection']">go back</button>
 <h2>Game name</h2>
 <button>log out</button>
 
@@ -19,43 +19,43 @@
 
     <br>
     <label for="px">Px</label><br>
-    <input disabled type="number" name="pxr" placeholder="Px"><br>
+    <p>{{px}}</p><br>
 
     <br>
     <label for="physical">Physical</label><br>
-    <input formControlName="physical" [disabled]="true" type="number" name="physical" placeholder="Physical">
+    <input formControlName="physical" type="number" readonly name="physical" placeholder="Physical">
     <button>+</button><button>-</button><br>
 
     <label for="skill">Skill</label><br>
-    <input formControlName="skill" name="skill" placeholder="Skill">
+    <input formControlName="skill" type="number" readonly name="skill" placeholder="Skill">
     <button>+</button><button>-</button><br>
 
     <label for="mental">Mental</label><br>
-    <input formControlName="mental" type="number" name="mental" placeholder="Mental">
+    <input formControlName="mental" type="number" readonly name="mental" placeholder="Mental">
     <button>+</button><button>-</button><br>
 
     <label for="Social">Social</label><br>
-    <input formControlName="social" type="number" name="social" placeholder="Social">
+    <input formControlName="social" type="number" readonly name="social" placeholder="Social">
     <button>+</button><button>-</button><br>
 
     <br>
     <label for="athletics">Athletics</label><br>
-    <input formControlName="athletics" type="number" name="athletics" placeholder="Athletics">
+    <input formControlName="athletics" type="number" readonly name="athletics" placeholder="Athletics">
     <button>+</button><button>-</button><br>
     <label for="knowledge">Knowledge</label><br>
-    <input formControlName="knowledge" type="number" name="knowledge" placeholder="Knowledge">
+    <input formControlName="knowledge" type="number" readonly name="knowledge" placeholder="Knowledge">
     <button>+</button><button>-</button><br>
     <label for="interpretation">Interpretation</label><br>
-    <input formControlName="interpretation" type="number" name="interpretation" placeholder="Interpretation">
+    <input formControlName="interpretation" type="number" readonly name="interpretation" placeholder="Interpretation">
     <button>+</button><button>-</button><br>
     <label for="perception">Perception</label><br>
-    <input formControlName="perception" type="number" name="perception" placeholder="Perception">
+    <input formControlName="perception" type="number" readonly name="perception" placeholder="Perception">
     <button>+</button><button>-</button><br>
     <label for="caution">Caution</label><br>
-    <input formControlName="caution" type="number" name="caution" placeholder="Caution">
+    <input formControlName="caution" type="number" readonly name="caution" placeholder="Caution">
     <button>+</button><button>-</button><br>
     <label for="conjuration">Conjuration</label><br>
-    <input formControlName="conjuration" type="number" name="conjuration" placeholder="Conjuration">
+    <input formControlName="conjuration" type="number" readonly name="conjuration" placeholder="Conjuration">
     <button>+</button><button>-</button><br>
 
     <br><br>

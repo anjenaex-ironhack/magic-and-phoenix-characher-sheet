@@ -117,4 +117,5 @@ export class MainViewComponent implements OnInit {
   goToCreateGame(): void {
     this.router.navigateByUrl("create-game")
   }
+  
 }

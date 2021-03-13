@@ -7,13 +7,13 @@
 <h3>You are the master</h3>
 
 <ul>
-    <li *ngFor="let game of gameListAsMaster; let index = index">{{game.name}} -- {{game.masterId}}</li>
+    <li [routerLink]="['/game',game.id,'master','character-selection']" *ngFor="let game of gameListAsMaster; let index = index">{{game.name}} -- {{game.masterId}}</li>
 </ul>
 
 <h3>You are a player</h3>
 
 <ul>
-    <li *ngFor="let game of gameListAsPlayer; let index = index">{{game.name}} -- {{game.masterId}}</li>
+    <li [routerLink]="['/game',game.id,'character-selection']" *ngFor="let game of gameListAsPlayer; let index = index">{{game.name}} -- {{game.masterId}}</li>
 </ul>
 
 <h2>Find your game</h2>
