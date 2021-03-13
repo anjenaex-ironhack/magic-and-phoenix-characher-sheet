@@ -112,50 +112,50 @@ export class CreateCharacterSheetComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  increasePhysical():void {
+  increasePhysical(): void {
     let physical: number[] = CharacterAttributes.increaseAttribute(this.physicalActualValue, 10, this.px)
     this.form.controls.physical.setValue(physical[0]);
     this.px = physical[1];
     this.physicalActualValue = this.form.value.physical;
     console.log(this.physicalActualValue)
   }
-  decreasePhysical():void {
+  decreasePhysical(): void {
     let physical: number[] = CharacterAttributes.decreaseAttribute(this.physicalActualValue, this.physicalStartingValue, this.px)
     this.form.controls.physical.setValue(physical[0]);
     this.px = physical[1];
     this.physicalActualValue = this.form.value.physical;
   }
-  increaseSkill():void {
+  increaseSkill(): void {
     let skill: number[] = CharacterAttributes.increaseAttribute(this.skillActualValue, 10, this.px)
     this.form.controls.skill.setValue(skill[0]);
     this.px = skill[1];
     this.skillActualValue = this.form.value.skill;
   }
-  decreaseSkill():void {
+  decreaseSkill(): void {
     let skill: number[] = CharacterAttributes.decreaseAttribute(this.skillActualValue, this.skillStartingValue, this.px)
     this.form.controls.skill.setValue(skill[0]);
     this.px = skill[1];
     this.skillActualValue = this.form.value.skill;
   }
-  increaseMental():void {
+  increaseMental(): void {
     let mental: number[] = CharacterAttributes.increaseAttribute(this.mentalActualValue, 10, this.px)
     this.form.controls.mental.setValue(mental[0]);
     this.px = mental[1];
     this.mentalActualValue = this.form.value.mental;
   }
-  decreaseMental():void {
+  decreaseMental(): void {
     let mental: number[] = CharacterAttributes.decreaseAttribute(this.mentalActualValue, this.mentalStartingValue, this.px)
     this.form.controls.mental.setValue(mental[0]);
     this.px = mental[1];
     this.mentalActualValue = this.form.value.mental;
   }
-  increaseSocial():void {
+  increaseSocial(): void {
     let social: number[] = CharacterAttributes.increaseAttribute(this.socialActualValue, 10, this.px)
     this.form.controls.social.setValue(social[0]);
     this.px = social[1];
     this.socialActualValue = this.form.value.social;
   }
-  decreaseSocial():void {
+  decreaseSocial(): void {
     let social: number[] = CharacterAttributes.decreaseAttribute(this.socialActualValue, this.socialStartingValue, this.px)
     this.form.controls.social.setValue(social[0]);
     this.px = social[1];
@@ -175,99 +175,99 @@ export class CreateCharacterSheetComponent implements OnInit {
     this.athleticsActualValue = this.form.value.athletics;
   }
 
-  increaseKnowledge(): void{
+  increaseKnowledge(): void {
     let ability: number[] = CharacterCommonAbilities.increaseCommonAbility(this.knowledgeActualValue, 5, this.px)
     this.form.controls.knowledge.setValue(ability[0]);
     this.px = ability[1];
     this.knowledgeActualValue = this.form.value.knowledge;
   }
-  decreaseKnowledge(): void{
+  decreaseKnowledge(): void {
     let ability: number[] = CharacterCommonAbilities.decreaseCommonAbility(this.knowledgeActualValue, 0, this.px)
     this.form.controls.knowledge.setValue(ability[0]);
     this.px = ability[1];
     this.knowledgeActualValue = this.form.value.knowledge
   }
-  increaseInterpretation(): void{
+  increaseInterpretation(): void {
     let ability: number[] = CharacterCommonAbilities.increaseCommonAbility(this.interpretationActualValue, 5, this.px)
     this.form.controls.interpretation.setValue(ability[0]);
     this.px = ability[1];
     this.interpretationActualValue = this.form.value.interpretation;
   }
-  decreaseInterpretation(): void{
+  decreaseInterpretation(): void {
     let ability: number[] = CharacterCommonAbilities.decreaseCommonAbility(this.interpretationActualValue, 0, this.px)
     this.form.controls.interpretation.setValue(ability[0]);
     this.px = ability[1];
     this.interpretationActualValue = this.form.value.interpretation;
   }
-  increasePerception(): void{
+  increasePerception(): void {
     let ability: number[] = CharacterCommonAbilities.increaseCommonAbility(this.perceptionActualValue, 5, this.px)
     this.form.controls.perception.setValue(ability[0]);
     this.px = ability[1];
     this.perceptionActualValue = this.form.value.perception;
   }
-  decreasePerception(): void{
+  decreasePerception(): void {
     let ability: number[] = CharacterCommonAbilities.decreaseCommonAbility(this.perceptionActualValue, 0, this.px)
     this.form.controls.perception.setValue(ability[0]);
     this.px = ability[1];
     this.perceptionActualValue = this.form.value.perception;
   }
-  increaseCaution(): void{
+  increaseCaution(): void {
     let ability: number[] = CharacterCommonAbilities.increaseCommonAbility(this.cautionActualValue, 5, this.px)
     this.form.controls.caution.setValue(ability[0]);
     this.px = ability[1];
     this.cautionActualValue = this.form.value.caution;
   }
-  decreaseCaution(): void{
+  decreaseCaution(): void {
     let ability: number[] = CharacterCommonAbilities.decreaseCommonAbility(this.cautionActualValue, 0, this.px)
     this.form.controls.caution.setValue(ability[0]);
     this.px = ability[1];
     this.cautionActualValue = this.form.value.caution;
   }
-  increaseConjuration(): void{
+  increaseConjuration(): void {
     let ability: number[] = CharacterCommonAbilities.increaseCommonAbility(this.conjurationActualValue, 5, this.px)
     this.form.controls.conjuration.setValue(ability[0]);
     this.px = ability[1];
     this.conjurationActualValue = this.form.value.conjuration;
   }
-  decreaseConjuration(): void{
+  decreaseConjuration(): void {
     let ability: number[] = CharacterCommonAbilities.decreaseCommonAbility(this.conjurationActualValue, 0, this.px)
     this.form.controls.conjuration.setValue(ability[0]);
     this.px = ability[1];
     this.conjurationActualValue = this.form.value.conjuration;
   }
-  
 
-createCharacter(form: FormGroup): void {
 
-  let gameId: number = 0;
+  createCharacter(form: FormGroup): void {
 
-  if(this.gameId != null){
-  gameId = parseInt(this.gameId.valueOf());
-}
+    let gameId: number = 0;
 
-let character = {
-  userId: this.userId,
-  gameId: gameId,
-  name: form.value.name,
-  racialLineage: form.value.racialLineage.toUpperCase(),
-  country: form.value.country.toUpperCase(),
-  profession: form.value.profession.toUpperCase(),
-  px: this.px,
-  physical: form.value.physical,
-  skill: form.value.skill,
-  mental: form.value.mental,
-  social: form.value.social,
-  athletics: form.value.athletics,
-  knowledge: form.value.knowledge,
-  interpretation: form.value.interpretation,
-  perception: form.value.perception,
-  caution: form.value.caution,
-  conjuration: form.value.conjuration
-}
+    if (this.gameId != null) {
+      gameId = parseInt(this.gameId.valueOf());
+    }
+
+    let character = {
+      userId: this.userId,
+      gameId: gameId,
+      name: form.value.name,
+      racialLineage: form.value.racialLineage.toUpperCase(),
+      country: form.value.country.toUpperCase(),
+      profession: form.value.profession.toUpperCase(),
+      px: this.px,
+      physical: form.value.physical,
+      skill: form.value.skill,
+      mental: form.value.mental,
+      social: form.value.social,
+      athletics: form.value.athletics,
+      knowledge: form.value.knowledge,
+      interpretation: form.value.interpretation,
+      perception: form.value.perception,
+      caution: form.value.caution,
+      conjuration: form.value.conjuration
+    }
 
     this.characterService.createCharacter(character).subscribe(resp => {
       console.log(resp)
     })
-
+    
   }
 }

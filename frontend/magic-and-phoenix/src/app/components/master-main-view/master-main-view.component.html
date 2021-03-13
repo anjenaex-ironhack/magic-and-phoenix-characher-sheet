@@ -1,5 +1,5 @@
 
-<button>go back</button>
+<button (click)="goBack()">go back</button>
 <h2>Name</h2>
 <button>Log out</button>
 
@@ -7,14 +7,13 @@
 
 <h2>Select a game</h2>
 
-<form (ngSubmit)="increasePx()" >
 
-<input type="number" name="increasePx" placeHolder="px">
+<input type="number" name="increasePx" placeHolder="px" [(ngModel)]="pxToIncrease">
 
-<button type="submit">Increase Group Experience</button>
-</form>
+<button type="submit" (click) = "increaseGroupPx(pxToIncrease)">Increase Group Experience</button>
 
 
-<ul>
-    <li *ngFor="let characterSheet of characterSheetList; let index = index">Name of the game</li>
+
+<ul> 
+    <li [routerLink] = "['/game',gameId, 'master','character', character.id]" *ngFor="let character of characterList; let index = index">{{character.name}}</li>
 </ul>

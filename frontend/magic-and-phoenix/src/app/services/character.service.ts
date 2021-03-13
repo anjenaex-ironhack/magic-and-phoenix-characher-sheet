@@ -21,6 +21,11 @@ export class CharacterService {
     const url = `${this.url}characters/game/${gameId}/player/${userId}`;
     return this.http.get<any>(url);
   }
+  //Show a list with all the characters by game
+  getCharacterListByGameId(gameId: string | null): Observable<any>{
+    const url= `${this.url}characters/game/${gameId}`;
+    return this.http.get<any>(url);
+  }
   getCharacterById(characterId: string | null ): Observable<any>{
     const url = `${this.url}character/${characterId}`;
     return this.http.get<any>(url);
@@ -36,6 +41,13 @@ export class CharacterService {
   updateCharacter(characterId: number, character: Character ): Observable<Character>{
     const url = `${this.url}character/${characterId}`;
     return this.http.put<Character>(url, character);
+  }
+
+  //Update px camp from a character by character id
+  updateCharacterPx(characterId: number, px: number){
+    const url = `${this.url}character/px/${characterId}`;
+    const pxDTO = {px: px};
+    return this.http.patch(url, pxDTO);
   }
   
 }

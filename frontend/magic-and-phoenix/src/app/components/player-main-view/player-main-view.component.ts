@@ -42,10 +42,4 @@ export class PlayerMainViewComponent implements OnInit {
     });
   }
 
-  selectCharacter(): void {
-    
-  }
-
-  
-
 }

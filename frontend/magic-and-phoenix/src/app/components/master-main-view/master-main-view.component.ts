@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Character } from 'src/app/models/character';
+import { CharacterService } from 'src/app/services/character.service';
 
 @Component({
   selector: 'app-master-main-view',
@@ -8,15 +10,45 @@ import { Character } from 'src/app/models/character';
 })
 export class MasterMainViewComponent implements OnInit {
 
-  characterSheetList: Character[] = [];
+  name: string = "Antonio";
+  gameId: string | null = this.activatedRoute.snapshot.paramMap.get('gameId');
+  userId: number = 1;
 
-  constructor() { }
+  pxToIncrease!: number;
+
+  characterList: Character[] = [];
+
+
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private characterServcie: CharacterService
+  ) { }
 
   ngOnInit(): void {
+    this.showCharacterList();
   }
 
-  increasePx(): void {
+  //go back to main-view
+  goBack(): void {
+    this.router.navigateByUrl("select-game");
+  }
 
+  //give info to the characterList properties
+  showCharacterList(): void {
+    const checkHasGameId: boolean = this.activatedRoute.snapshot.paramMap.has('gameId');
+    this.characterServcie.getCharacterListByGameId(this.gameId).subscribe(resp => {
+      this.characterList = resp;
+      console.log(resp);
+    });
+  }
+  increaseGroupPx(px: number): void {
+    this.characterList.forEach(character => {
+      this.characterServcie.updateCharacterPx(character.id, px).subscribe(resp => {
+        console.log(resp);
+      }
+      )
+    })
   }
 
 }
