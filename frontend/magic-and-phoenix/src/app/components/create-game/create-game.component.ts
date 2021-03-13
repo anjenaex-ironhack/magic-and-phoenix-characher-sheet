@@ -42,6 +42,8 @@ export class CreateGameComponent implements OnInit {
     this.router.navigateByUrl("select-game");
   }
 
+  
+
   createGame(form: FormGroup): void {
 
     const game =  {
