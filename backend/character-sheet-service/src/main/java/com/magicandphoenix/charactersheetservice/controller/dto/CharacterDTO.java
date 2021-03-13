@@ -12,6 +12,9 @@ import java.util.List;
 public class CharacterDTO {
 
     //metadata
+
+    private Long id;
+
     @NotNull
     private Long userId;
     @NotNull
@@ -54,6 +57,7 @@ public class CharacterDTO {
     public CharacterDTO(Character character){
 
         //Metadata
+        setId(character.getId());
         setUserId(character.getUserId());
         setGameId(character.getGameId());
 
@@ -81,6 +85,14 @@ public class CharacterDTO {
 
     public String getName() {
         return name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setName(String name) {

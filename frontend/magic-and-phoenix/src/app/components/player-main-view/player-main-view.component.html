@@ -7,7 +7,7 @@
 <h2>Select a Character</h2>
 
 <ul>
-    <li *ngFor="let character of characterList; let index = index">{{character.name}}</li> 
+    <li [routerLink] = "['/game',gameId, 'character', character.id]" *ngFor="let character of characterList; let index = index">{{character.name}}</li> 
 </ul>
 
 <button type="submit" 
