@@ -17,8 +17,15 @@ export class PlayerCharacterSheetComponent implements OnInit {
 
   //MetaData
   gameId: string | null = this.activatedRoute.snapshot.paramMap.get('gameId');
+  characterId: string | null = this.activatedRoute.snapshot.paramMap.get('characterId');
   userId: number = 1;
   px: number = 40;
+
+  //Basic info Moment dependant Attributes
+  name: string = "Name not found";
+  racialLineaje: string = "Racial lineaje not found";
+  country: string = "Country not found";
+  profession: string = "Profession not found";
 
   //Attribute Moment dependant Attributes
   physicalStartingValue: number = 4;
@@ -72,10 +79,10 @@ export class PlayerCharacterSheetComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private characterService: CharacterService
   ) {
-    this.nameField = new FormControl('', [Validators.required])
-    this.racialLineageField = new FormControl('', [Validators.required])
-    this.countryField = new FormControl('', [Validators.required])
-    this.professionField = new FormControl('', [Validators.required])
+    this.nameField = new FormControl(this.name, [Validators.required])
+    this.racialLineageField = new FormControl(this.racialLineaje, [Validators.required])
+    this.countryField = new FormControl(this.country, [Validators.required])
+    this.professionField = new FormControl(this.profession, [Validators.required])
 
     this.physicalField = new FormControl(this.physicalActualValue, [Validators.required, Validators.max(10), Validators.min(4)])
     this.skillField = new FormControl(this.skillActualValue, [Validators.required, Validators.max(10), Validators.min(4)])
@@ -111,6 +118,7 @@ export class PlayerCharacterSheetComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getCharacter(this.characterId);
   }
 
   increasePhysical(): void {
@@ -238,12 +246,19 @@ export class PlayerCharacterSheetComponent implements OnInit {
   }
 
 
-  createCharacter(form: FormGroup): void {
+  updateCharacter(form: FormGroup): void {
 
     let gameId: number = 0;
 
-    if (this.gameId != null) {
-      gameId = parseInt(this.gameId.valueOf());
+  if(this.gameId != null){
+  gameId = parseInt(this.gameId.valueOf());
+}
+
+    let characterId: string | null = this.characterId;
+    let characterIdNumber: number = 0;
+
+    if (this.characterId != null) {
+      characterIdNumber = parseInt(this.characterId.valueOf());
     }
 
     let character = {
@@ -266,25 +281,48 @@ export class PlayerCharacterSheetComponent implements OnInit {
       conjuration: form.value.conjuration
     }
 
-    this.characterService.createCharacter(character).subscribe(resp => {
-      console.log(resp)
+    this.characterService.updateCharacter(characterIdNumber, character).subscribe(resp => {
+      console.log(resp);
     })
 
   }
 
-  getCharacter(characterId: number): void {
+  getCharacter(characterId: string | null): void {
       //llamar al servicio character. que me traiga un character por id
       //rellenar la el campo character Id con la id recibida.
       //rellenar todos los campos de los formularios, con la informacion recibida
+      this.characterService.getCharacterById(this.characterId).subscribe(resp => {
+
+        this.px = resp.px;
+
+        this.form.controls.name.setValue(resp.name);
+        this.form.controls.racialLineage.setValue(resp.racialLineage);
+        this.form.controls.country.setValue(resp.country);
+        this.form.controls.profession.setValue(resp.profession);
+
+        this.form.controls.physical.setValue(resp.physical);
+        this.physicalActualValue = resp.physical;
+        this.form.controls.skill.setValue(resp.skill);
+        this.skillActualValue = resp.skill;
+        this.form.controls.mental.setValue(resp.mental);
+        this.mentalActualValue = resp.mentalM
+        this.form.controls.social.setValue(resp.social);
+        this.socialActualValue = resp.social;
+
+        this.form.controls.athletics.setValue(resp.athletics);
+        this.athleticsActualValue = resp.athletics;
+        this.form.controls.knowledge.setValue(resp.knowledge);
+        this.knowledgeActualValue = resp.knowledge;
+        this.form.controls.interpretation.setValue(resp.interpretation);
+        this.interpretationActualValue = resp.interpretation;
+        this.form.controls.perception.setValue(resp.perception);
+        this.perceptionActualValue = resp.perception;
+        this.form.controls.caution.setValue(resp.caution);
+        this.cautionActualValue = resp.caution;
+        this.form.controls.conjuration.setValue(resp.conjuration);
+        this.conjurationActualValue = resp.conjuration;
+      })
   }
 
-  //Todos los increase y decrease de create
-
-  updateCharacter(character: Character) {
-    //rellenar un character con los datos del formulario 
-    //llamar al servicio character. que me actualice el character, con una peticion put.
-    //que saque su id y los datos del character
-    //Bonus. que al master se le actualice 
-  }
 
 }

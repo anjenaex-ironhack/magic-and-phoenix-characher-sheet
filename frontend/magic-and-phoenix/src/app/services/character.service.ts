@@ -21,11 +21,21 @@ export class CharacterService {
     const url = `${this.url}characters/game/${gameId}/player/${userId}`;
     return this.http.get<any>(url);
   }
+  getCharacterById(characterId: string | null ): Observable<any>{
+    const url = `${this.url}character/${characterId}`;
+    return this.http.get<any>(url);
+  }
 
   //Create a new character
   createCharacter(character: Character): Observable<Character>{
     const url = `${this.url}character`;
     return this.http.post<Character>(url, character);
+  }
+
+  //Update character
+  updateCharacter(characterId: number, character: Character ): Observable<Character>{
+    const url = `${this.url}character/${characterId}`;
+    return this.http.put<Character>(url, character);
   }
   
 }
