@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users_table",
         uniqueConstraints = {
-            @UniqueConstraint(columnNames = "name"),
+            @UniqueConstraint(columnNames = "username"),
             @UniqueConstraint(columnNames = "email")
         })
 public class User {
@@ -19,7 +19,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String Username;
+    private String username;
     private String email;
     private String password;
 
@@ -53,11 +53,11 @@ public class User {
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public String getEmail() {
@@ -83,4 +83,5 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
 }
