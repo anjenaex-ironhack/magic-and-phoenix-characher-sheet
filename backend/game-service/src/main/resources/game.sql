@@ -1,23 +1,23 @@
-drop schema game;
-create schema game;
-use game;
+DROP SCHEMA game;
+CREATE SCHEMA game;
+USE game;
 
-create table game (
+CREATE TABLE game (
 id BIGINT AUTO_INCREMENT,
-name varchar(255),
-master_id bigint,
-token varchar(255),
+name VARCHAR(255),
+master_id BIGINT,
+token VARCHAR(255),
 PRIMARY KEY(id)
 );
 
-create table user_id(
+CREATE TABLE user_id(
 id BIGINT,
 PRIMARY KEY(id)
 );
 
-create table game_has_user_list(
-game_id bigint,
-user_id bigint,
+CREATE TABLE game_has_user_list(
+game_id BIGINT,
+user_id BIGINT,
 PRIMARY KEY(game_id, user_id)
 );
 

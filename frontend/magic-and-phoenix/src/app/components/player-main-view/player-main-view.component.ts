@@ -63,7 +63,7 @@ export class PlayerMainViewComponent implements OnInit {
     const checkHasGameId: boolean = this.activatedRoute.snapshot.paramMap.has('gameId');
        this.characterServcie.getPlayerCharacterList(this.gameId, userId).subscribe(resp => {
       this.characterList = resp;
-      console.log(resp)
+      console.log(this.gameId)
     });
   }
 
