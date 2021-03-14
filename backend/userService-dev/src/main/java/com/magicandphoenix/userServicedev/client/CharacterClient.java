@@ -1,46 +1,34 @@
-package com.magicandphoenix.userServicedev.controller.impl;
+package com.magicandphoenix.userServicedev.client;
 
-import com.magicandphoenix.userServicedev.client.CharacterClient;
 import com.magicandphoenix.userServicedev.controller.dto.CharacterDTO;
 import com.magicandphoenix.userServicedev.controller.dto.PxDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.PATCH})
-@RequestMapping("/api")
-public class CharacterController {
-
-    @Autowired
-    private CharacterClient characterClient;
+@FeignClient("characterSheetService-dev")
+public interface CharacterClient {
 
     //=======================================
     // Get Methods
     //=======================================
 
-    //Get a character by id
-    @GetMapping("character/{id}")
+   @GetMapping("character/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public CharacterDTO getCharacterById(@PathVariable Long id) {
-        return characterClient.getCharacterById(id);
-    }
+    CharacterDTO getCharacterById(@PathVariable Long id);
 
     //Get a character list by gameId
     @GetMapping("characters/game/{gameId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<CharacterDTO> getCharacterListByGameId(@PathVariable Long gameId) {
-        return characterClient.getCharacterListByGameId(gameId);
-    }
+    List<CharacterDTO> getCharacterListByGameId(@PathVariable Long gameId);
 
     @GetMapping("characters/game/{gameId}/player/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<CharacterDTO> getCharacterListByGameIdAndUserId(@PathVariable Long gameId, @PathVariable Long userId) {
-        return characterClient.getCharacterListByGameIdAndUserId(gameId, userId);
-    }
+    List<CharacterDTO> getCharacterListByGameIdAndUserId(@PathVariable Long gameId, @PathVariable Long userId);
 
     //=======================================
     // Post Methods
@@ -49,9 +37,7 @@ public class CharacterController {
     //Create a new Character
     @PostMapping("character")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createCharacter(@RequestBody @Valid CharacterDTO characterDTO) {
-        characterClient.createCharacter(characterDTO);
-    }
+    void createCharacter(@RequestBody @Valid CharacterDTO characterDTO);
 
     //=======================================
     // Put Methods
@@ -60,21 +46,16 @@ public class CharacterController {
     //Update any field from a character by id
     @PutMapping("character/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void upgradeCharacterById(@PathVariable Long id, @RequestBody @Valid CharacterDTO characterDTO) {
-        characterClient.upgradeCharacterById(id, characterDTO);
-    }
+    void upgradeCharacterById(@PathVariable Long id, @RequestBody @Valid CharacterDTO characterDTO);
 
     //=======================================
     // Patch Methods
     //=======================================
 
     //Update the px field from a character by id
-    //TODO: this patch also doesn't work
     @PatchMapping("character/px/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void updatePxById(@PathVariable Long id, @RequestBody @Valid PxDTO pxDTO) {
-        characterClient.updatePxById(id, pxDTO);
-    }
+    void updatePxById(@PathVariable Long id, @RequestBody @Valid PxDTO pxDTO);
 
     //=======================================
     // Delete Methods
@@ -83,8 +64,6 @@ public class CharacterController {
     //Delete a character
     @DeleteMapping("character/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCharacter(@PathVariable Long id) {
-        characterClient.deleteCharacter(id);
-    }
+    public void deleteCharacter(@PathVariable Long id);
 
 }

@@ -10,7 +10,7 @@ import { Character } from '../interfaces/character';
 })
 export class CharacterService {
 
-  url: string = "http://localhost:8080/";
+  url: string = "http://localhost:8082/api/";
 
   constructor(
     private http: HttpClient
@@ -45,7 +45,7 @@ export class CharacterService {
 
   //Update px camp from a character by character id
   updateCharacterPx(characterId: number, px: number){
-    const url = `${this.url}character/px/${characterId}`;
+    const url = `http://localhost:8080/character/px/${characterId}`;
     const pxDTO = {px: px};
     return this.http.patch(url, pxDTO);
   }
