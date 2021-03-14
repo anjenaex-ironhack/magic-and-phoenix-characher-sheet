@@ -4,6 +4,7 @@ import { Game } from 'src/app/models/game';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GameService } from '../../services/game.service';
 import { GameDTO } from 'src/app/dto/game-dto';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-main-view',
@@ -12,13 +13,13 @@ import { GameDTO } from 'src/app/dto/game-dto';
 })
 export class MainViewComponent implements OnInit {
 
-  name: string = "Antonio";
+  name: string = "";
   gameListAsMaster: GameDTO[] = [];
   gameListAsPlayer: GameDTO[] = [];
   gameListToJoin: GameDTO[] = [];
 
   //Este id tiene que venir del login
-  userId: number =  1;
+  userId: number = 0;
 
   form: FormGroup;
   findGameForm: FormGroup;
@@ -27,6 +28,7 @@ export class MainViewComponent implements OnInit {
   nameField: FormControl;
 
   constructor(
+    private authService: AuthService,
     private gameService: GameService,
     private router:Router
   ) {
@@ -43,8 +45,27 @@ export class MainViewComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.showGameListAsMaster(this.userId);
-    this.showGameListAsPlayer(this.userId);
+    this.init();
+    
+  }
+
+  init() {
+
+    this.authService.getUserId().subscribe(resp => {
+      this.userId =  resp;
+      this.showGameListAsMaster(resp);
+      this.showGameListAsPlayer(resp);
+    });
+    this.authService.getUsername().subscribe(resp => {
+      this.name = resp;
+    });
+    
+  }
+  logout():void {
+    this.authService.deleteToken();
+    this.gameListAsMaster = [];
+    this.gameListAsPlayer = [];
+    this.router.navigateByUrl("/login");
   }
 
   checkGameToJoin(name: string): boolean {

@@ -6,6 +6,7 @@ import { CharacterAttributes } from 'src/app/utils/character-attributes';
 import { Character } from '../../interfaces/character';
 import { CharacterService } from '../../services/character.service';
 import { CharacterCommonAbilities } from '../../utils/character-common-abilities';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-create-character-sheet',
@@ -16,7 +17,7 @@ export class CreateCharacterSheetComponent implements OnInit {
 
   //MetaData
   gameId: string | null = this.activatedRoute.snapshot.paramMap.get('gameId');
-  userId: number = 1;
+  userId: number = 0;
   px: number = 40;
 
   //Attribute Moment dependant Attributes
@@ -69,7 +70,8 @@ export class CreateCharacterSheetComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private characterService: CharacterService
+    private characterService: CharacterService,
+    private authService: AuthService
   ) {
     this.nameField = new FormControl('', [Validators.required])
     this.racialLineageField = new FormControl('', [Validators.required])
@@ -110,6 +112,25 @@ export class CreateCharacterSheetComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.init();
+  }
+
+  init() {
+
+    this.authService.getUserId().subscribe(resp => {
+      this.userId =  resp;
+      
+    });
+    // this.authService.getUsername().subscribe(resp => {
+    //   this.name = resp;
+    // });
+    
+  }
+
+  logout():void {
+    this.authService.deleteToken();
+    
+    this.router.navigateByUrl("/login");
   }
 
   increasePhysical(): void {

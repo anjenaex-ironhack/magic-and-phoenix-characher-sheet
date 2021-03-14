@@ -1,10 +1,10 @@
 <h2>Magic & Phoenix</h2>
 
-<form (ngSubmit)="login(form.value)" [formGroup]="form">
+<form (ngSubmit)="login(form)" [formGroup]="form">
 
     <label for="name">Name</label><br>
     <input formControlName = "name" type="text" name="name" placeholder="insert your name here"><br>
-    <p class="error-msg" *ngIf="nameField.hasError('required') && nameField.touched">Email is required</p>
+    <p class="error-msg" *ngIf="nameField.hasError('required') && nameField.touched">Name is required</p>
     <br>
     <label for="password">Password</label><br>
     <input formControlName = "password" type="password" name="Password" placeholder="insert your password here">

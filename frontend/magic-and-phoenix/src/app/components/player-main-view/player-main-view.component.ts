@@ -3,6 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Character } from 'src/app/models/character';
 import { CharacterService } from '../../services/character.service';
+import { Auth } from '../../interfaces/auth';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-player-main-view',
@@ -11,9 +13,9 @@ import { CharacterService } from '../../services/character.service';
 })
 export class PlayerMainViewComponent implements OnInit {
 
-  name: string = "Antonio";
+  name: string = "";
   gameId: string | null = this.activatedRoute.snapshot.paramMap.get('gameId');
-  userId: number = 1;
+  userId: number = 0;
 
   characterList: Character[] = [];
 
@@ -21,11 +23,34 @@ export class PlayerMainViewComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private characterServcie: CharacterService
+    private characterServcie: CharacterService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.showCharacterList();
+    //this.showCharacterList(1);
+    this.init();
+    
+  }
+
+  init() {
+
+    this.authService.getUserId().subscribe(resp => {
+      this.userId =  resp; 
+      console.log(resp)
+      this.showCharacterList(resp);
+      
+    });
+    this.authService.getUsername().subscribe(resp => {
+      this.name = resp;
+    });
+    
+  }
+  logout():void {
+    this.authService.deleteToken();
+    this.characterList = [];
+
+    this.router.navigateByUrl("/login");
   }
   
   //go back to main-view
@@ -34,9 +59,9 @@ export class PlayerMainViewComponent implements OnInit {
   }
 
   //give info to the characterList properties
-  showCharacterList(): void {
+  showCharacterList(userId: number): void {
     const checkHasGameId: boolean = this.activatedRoute.snapshot.paramMap.has('gameId');
-       this.characterServcie.getPlayerCharacterList(this.gameId, this.userId).subscribe(resp => {
+       this.characterServcie.getPlayerCharacterList(this.gameId, userId).subscribe(resp => {
       this.characterList = resp;
       console.log(resp)
     });

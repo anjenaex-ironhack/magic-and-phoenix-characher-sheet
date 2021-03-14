@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Character } from 'src/app/models/character';
 import { CharacterService } from 'src/app/services/character.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-master-main-view',
@@ -10,9 +11,9 @@ import { CharacterService } from 'src/app/services/character.service';
 })
 export class MasterMainViewComponent implements OnInit {
 
-  name: string = "Antonio";
+  name: string = "";
   gameId: string | null = this.activatedRoute.snapshot.paramMap.get('gameId');
-  userId: number = 1;
+  userId: number = 0;
 
   pxToIncrease!: number;
 
@@ -22,11 +23,28 @@ export class MasterMainViewComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private characterServcie: CharacterService
+    private characterServcie: CharacterService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
     this.showCharacterList();
+    this.init();
+  }
+
+  init() {
+
+    this.authService.getUserId().subscribe(resp => {
+      this.userId =  resp;
+    });
+    this.authService.getUsername().subscribe(resp => {
+      this.name = resp;
+    });
+    
+  }
+  logout():void {
+    this.authService.deleteToken();
+    this.router.navigateByUrl("/login");
   }
 
   //go back to main-view

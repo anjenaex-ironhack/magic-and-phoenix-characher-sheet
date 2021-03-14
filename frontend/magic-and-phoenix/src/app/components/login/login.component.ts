@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginData } from 'src/app/interfaces/login-data';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,8 @@ export class LoginComponent implements OnInit {
   passwordField: FormControl;
 
   constructor(
-      private router: Router
+      private router: Router,
+      private authService: AuthService
   ) { 
     // Initialize Form Control fields
     this.nameField = new FormControl('', [ Validators.required]);
@@ -38,6 +41,16 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: FormGroup): void {
-    console.log(form)
+    let user: any = {
+      "username": form.value.name,
+      "password": form.value.password
+  }
+    this.authService.login(user).subscribe(resp => {
+      this.authService.setToken(resp.accessToken);
+      this.router.navigateByUrl("/select-game")
+    }, err => {
+      alert("username or password incorrect");
+    })   
+    
   }
 }

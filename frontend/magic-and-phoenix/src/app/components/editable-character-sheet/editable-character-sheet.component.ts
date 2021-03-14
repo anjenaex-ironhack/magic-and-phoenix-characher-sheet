@@ -5,6 +5,7 @@ import { Character } from 'src/app/models/character';
 import { CharacterService } from 'src/app/services/character.service';
 import { CharacterAttributes } from 'src/app/utils/character-attributes';
 import { CharacterCommonAbilities } from 'src/app/utils/character-common-abilities';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-editable-character-sheet',
@@ -13,11 +14,11 @@ import { CharacterCommonAbilities } from 'src/app/utils/character-common-abiliti
 })
 export class EditableCharacterSheetComponent implements OnInit {
 
-
+  playerName ="";
   //MetaData
   gameId: string | null = this.activatedRoute.snapshot.paramMap.get('gameId');
   characterId: string | null = this.activatedRoute.snapshot.paramMap.get('characterId');
-  userId: number = 1;  
+  userId: number = 0;  
 
   //Basic info Moment dependant Attributes
   name: string = "Name not found";
@@ -77,7 +78,8 @@ export class EditableCharacterSheetComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private characterService: CharacterService
+    private characterService: CharacterService,
+    private authService: AuthService
   ) {
 
     this.pxField = new FormControl('', [Validators.required])
@@ -125,6 +127,22 @@ export class EditableCharacterSheetComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCharacter(this.characterId);
+    this.init
+  }
+
+  init() {
+
+    this.authService.getUserId().subscribe(resp => {
+      this.userId =  resp;
+    });
+    this.authService.getUsername().subscribe(resp => {
+      this.name = resp;
+    });
+    
+  }
+  logout():void {
+    this.authService.deleteToken();
+    this.router.navigateByUrl("/login");
   }
 
   updateCharacter(form: FormGroup): void {

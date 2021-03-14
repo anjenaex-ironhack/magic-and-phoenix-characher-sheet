@@ -6,6 +6,7 @@ import { Game } from 'src/app/models/game';
 import { CharacterService } from 'src/app/services/character.service';
 import { CharacterAttributes } from 'src/app/utils/character-attributes';
 import { CharacterCommonAbilities } from 'src/app/utils/character-common-abilities';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-player-character-sheet',
@@ -77,7 +78,8 @@ export class PlayerCharacterSheetComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private characterService: CharacterService
+    private characterService: CharacterService,
+    private authService: AuthService
   ) {
     this.nameField = new FormControl(this.name, [Validators.required])
     this.racialLineageField = new FormControl(this.racialLineaje, [Validators.required])
@@ -118,7 +120,27 @@ export class PlayerCharacterSheetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCharacter(this.characterId);
+    this.init();
+    
+  }
+
+  init() {
+
+    this.authService.getUserId().subscribe(resp => {
+      this.userId =  resp;
+      this.getCharacter(this.characterId);
+      
+    });
+    this.authService.getUsername().subscribe(resp => {
+      this.name = resp;
+    });
+    
+  }
+  logout():void {
+    this.authService.deleteToken();
+  
+  
+    this.router.navigateByUrl("/login");
   }
 
   increasePhysical(): void {

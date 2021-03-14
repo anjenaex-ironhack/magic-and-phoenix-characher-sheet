@@ -1,6 +1,6 @@
 <button [routerLink]="['/game',gameId,'master','character-selection']">go back</button>
-<h2>Game name</h2>
-<button>log out</button>
+<h2>{{playerName}}</h2>
+<button (click) = "logout()">log out</button>
 
 <br><br>
 

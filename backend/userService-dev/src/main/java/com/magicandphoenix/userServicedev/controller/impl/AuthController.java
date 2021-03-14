@@ -12,6 +12,7 @@ import com.magicandphoenix.userServicedev.repository.UserRepository;
 import com.magicandphoenix.userServicedev.security.jwt.JwtUtils;
 import com.magicandphoenix.userServicedev.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,7 +27,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.PATCH})
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -44,6 +45,18 @@ public class AuthController {
 
     @Autowired
     JwtUtils jwtUtils;
+
+    @GetMapping("/username/{token}")
+    @ResponseStatus(HttpStatus.OK)
+    public String getUsernameByToken(@PathVariable String token){
+        return jwtUtils.getUserNameFromJwtToken(token);
+    }
+    @GetMapping("/user-id/{token}")
+    @ResponseStatus(HttpStatus.OK)
+    public Long getUserIdByToken(@PathVariable String token){
+
+        return userRepository.findIdByUsername(jwtUtils.getUserNameFromJwtToken(token));
+    }
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {

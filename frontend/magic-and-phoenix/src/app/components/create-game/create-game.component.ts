@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GameDTO } from '../../dto/game-dto'
 import { GameService } from '../../services/game.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-create-game',
@@ -17,11 +18,13 @@ export class CreateGameComponent implements OnInit {
   tokenField: FormControl;
 
   //Esta id hay que sacarla de la persona que tiene iniciada la sesion
-  userId: number = 1;
+  name: string = "";
+  userId: number = 0;
 
   constructor(
     private router: Router,
-    private gameService: GameService
+    private gameService: GameService,
+    private authService: AuthService
   ) {
     // Initialize Form Control fields
     this.nameField = new FormControl('', [ Validators.required]);
@@ -35,7 +38,27 @@ export class CreateGameComponent implements OnInit {
     })
    }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
+    this.init();
+    
+  }
+
+  init() {
+
+    this.authService.getUserId().subscribe(resp => {
+      
+      this.userId =  resp;
+     
+    });
+    this.authService.getUsername().subscribe(resp => {
+      this.name = resp;
+    });
+    
+  }
+  logout():void {
+    this.authService.deleteToken();
+    
+    this.router.navigateByUrl("/login");
   }
 
   goBack(): void {
@@ -53,7 +76,7 @@ export class CreateGameComponent implements OnInit {
     };
 
     this.gameService.createGame(game).subscribe(resp => {
-      console.log(resp);
+      
     })
 
     alert(`token generated: ${form.value.token}`)
