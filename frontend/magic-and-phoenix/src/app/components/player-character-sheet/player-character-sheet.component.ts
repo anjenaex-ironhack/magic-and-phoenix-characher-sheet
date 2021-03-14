@@ -20,6 +20,7 @@ export class PlayerCharacterSheetComponent implements OnInit {
   gameId: string | null = this.activatedRoute.snapshot.paramMap.get('gameId');
   characterId: string | null = this.activatedRoute.snapshot.paramMap.get('characterId');
   userId: number = 1;
+  username: string = "";
   px: number = 40;
 
   //Basic info Moment dependant Attributes
@@ -132,7 +133,7 @@ export class PlayerCharacterSheetComponent implements OnInit {
       
     });
     this.authService.getUsername().subscribe(resp => {
-      this.name = resp;
+      this.username = resp;
     });
     
   }
@@ -346,5 +347,10 @@ export class PlayerCharacterSheetComponent implements OnInit {
       })
   }
 
+  deleteCharacter(characterId: string | null): void {
+    this.characterService.deleteCharacter(characterId).subscribe(resp => {
+      console.log( `character with name ${this.name}`);
+    })
+  }
 
 }

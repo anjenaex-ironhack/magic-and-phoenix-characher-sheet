@@ -49,5 +49,11 @@ export class CharacterService {
     const pxDTO = {px: px};
     return this.http.patch(url, pxDTO);
   }
+
+  //Delete a character by id
+  deleteCharacter(characterId: string | null):Observable<any>{
+    const url = `${this.url}character/${characterId}`;
+    return this.http.delete(url);
+  }
   
 }
