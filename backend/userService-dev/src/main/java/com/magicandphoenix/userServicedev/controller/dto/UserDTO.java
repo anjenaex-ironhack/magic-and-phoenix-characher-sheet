@@ -4,31 +4,31 @@ import com.magicandphoenix.userServicedev.model.User;
 
 public class UserDTO {
 
-    private String name;
+    private String username;
     private String email;
     private String password;
 
     public UserDTO() {
     }
 
-    public UserDTO(String name, String email, String password) {
-        setName(name);
+    public UserDTO(String username, String email, String password) {
+        setUsername(username);
         setEmail(email);
         setPassword(password);
     }
 
     public UserDTO(User user) {
-        setName(user.getName());
+        setUsername(user.getUsername());
         setEmail(user.getEmail());
         setPassword(user.getPassword());
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

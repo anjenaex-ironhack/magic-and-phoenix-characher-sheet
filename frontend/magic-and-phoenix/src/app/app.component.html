@@ -6,21 +6,7 @@
         routerLinkActive="active">register</li>
     <li routerLink="select-game" 
         routerLinkActive="active">Select game</li>
-    <li routerLink="create-game" 
-        routerLinkActive="active">Create game</li>
-    <li routerLink="game/:gameId/master/character-selection" 
-        routerLinkActive="active">master: select character</li>
-    <li routerLink="game/:gameId/master/character/:character-id" 
-        routerLinkActive="active">master: edit character</li>
-    <li routerLink="game/:gameId/character-selection" 
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact: true}" >player: select character</li>
-    <li routerLink="game/:gameId/character/create" 
-        routerLinkActive="active" 
-        [routerLinkActiveOptions]="{exact: true}" >player: create character</li>
-    <li routerLink="game/:gameId/character/:characterId" 
-        routerLinkActive="active" 
-        [routerLinkActiveOptions]="{exact: true}">player: edite character</li>
+    
 </ul>
 
 <router-outlet></router-outlet>
