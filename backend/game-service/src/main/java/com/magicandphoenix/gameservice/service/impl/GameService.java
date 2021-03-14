@@ -93,7 +93,7 @@ public class GameService implements IGameService {
         return gameDTO;
     }
 
-    public Game addNewPlayer(Long gameId, UserDTO userDTO) {
+    public void addNewPlayer(Long gameId, UserDTO userDTO) {
         //Check if the game exist
         if(gameRepository.findById(gameId).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "game with id " + gameId + " not found");
@@ -114,7 +114,7 @@ public class GameService implements IGameService {
                 //update the data
                 game.getUserIdList().add(userIdRepository.findById(userDTO.getUserId()).get());
                 gameRepository.save(game);
-                return game;
+
             }
         }
     }

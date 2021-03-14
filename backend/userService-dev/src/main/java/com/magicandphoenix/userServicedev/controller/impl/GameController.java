@@ -1,24 +1,20 @@
-package com.magicandphoenix.gameservice.controller.impl;
+package com.magicandphoenix.userServicedev.controller.impl;
 
-import com.magicandphoenix.gameservice.controller.dto.GameDTO;
-import com.magicandphoenix.gameservice.controller.dto.GameWithListsDTO;
-import com.magicandphoenix.gameservice.controller.dto.UserDTO;
-import com.magicandphoenix.gameservice.controller.interfaces.IGameController;
-import com.magicandphoenix.gameservice.model.Game;
-import com.magicandphoenix.gameservice.service.interfaces.IGameService;
+import com.magicandphoenix.userServicedev.client.GameClient;
+import com.magicandphoenix.userServicedev.controller.dto.GameDTO;
+import com.magicandphoenix.userServicedev.controller.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.GeneratedValue;
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.PATCH})
-public class GameController implements IGameController {
-
+@RequestMapping("/api")
+public class GameController {
     @Autowired
-    private IGameService gameService;
+    private GameClient gameClient;
 
     //=======================================
     // Get Methods
@@ -28,28 +24,28 @@ public class GameController implements IGameController {
     @GetMapping("games")
     @ResponseStatus(HttpStatus.OK)
     public List<GameDTO> gameList() {
-        return gameService.gameList();
+        return gameClient.gameList();
     }
 
     //Game List by game name
     @GetMapping("games/name/{name}")
     @ResponseStatus(HttpStatus.OK)
     public List<GameDTO> getGameListByName(@PathVariable String name) {
-        return gameService.getGameListByName(name);
+        return gameClient.getGameListByName(name);
     }
 
     //Game list by user id
     @GetMapping("games/user-id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public List<GameDTO> getGameListByUserId(@PathVariable Long id) {
-        return gameService.getGameListByUserId(id);
+        return gameClient.getGameListByUserId(id);
     }
 
     //Game list by master id
     @GetMapping("games/master-id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public List<GameDTO> getGameListByMasterId(@PathVariable Long id) {
-        return gameService.getGameListByMasterId(id);
+        return gameClient.getGameListByMasterId(id);
     }
 
     //game by id
@@ -57,7 +53,7 @@ public class GameController implements IGameController {
     @ResponseStatus(HttpStatus.OK)
     public GameDTO getGameById(@PathVariable Long id) {
 
-        return gameService.getGameById(id);
+        return gameClient.getGameById(id);
     }
 
     //=======================================
@@ -68,7 +64,7 @@ public class GameController implements IGameController {
     @PostMapping("game")
     @ResponseStatus(HttpStatus.CREATED)
     public GameDTO createGame(@RequestBody GameDTO gameDTO) {
-        return gameService.createGame(gameDTO);
+        return gameClient.createGame(gameDTO);
     }
 
 
@@ -77,10 +73,11 @@ public class GameController implements IGameController {
     //=======================================
 
     //add a new user to the game
+    //TODO: This one doesn't work, check why
     @PatchMapping("game/{gameId}/add-player")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void addNewPlayer(@PathVariable Long gameId, @RequestBody UserDTO userDTO) {
-        gameService.addNewPlayer(gameId,userDTO);
+        gameClient.addNewPlayer(gameId,userDTO);
     }
 
     //=======================================
@@ -91,6 +88,6 @@ public class GameController implements IGameController {
     @DeleteMapping("game/{gameId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteGame(@PathVariable Long gameId) {
-        gameService.deleteGame(gameId);
+        gameClient.deleteGame(gameId);
     }
 }

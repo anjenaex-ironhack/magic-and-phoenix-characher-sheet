@@ -9,7 +9,7 @@ import { GameDTO } from '../dto/game-dto';
 })
 export class GameService {
 
-  readonly url: string = "http://localhost:8081/";
+  readonly url: string = "http://localhost:8082/api/";
 
 
   constructor(
@@ -36,13 +36,13 @@ export class GameService {
 
   //Find a list of game by game name to have the posibility to join
   findGameToJoin(name: string): Observable<GameDTO[]> {
-    const url = `${this.url}/games/name/${name}`;
+    const url = `${this.url}games/name/${name}`;
     return this.http.get<GameDTO[]>(url);
   }
 
   //update the gameList[] input from the User, to add a new game to the user
   joinGame(gameId: number, userId: number): Observable<any> {
-    const url = `${this.url}/game/${gameId}/add-player`;
+    const url = `http://localhost:8081/game/${gameId}/add-player`;
     const userIdDTO = {
       userId: userId
     }

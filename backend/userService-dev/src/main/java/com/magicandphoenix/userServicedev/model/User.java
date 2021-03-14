@@ -1,10 +1,8 @@
 package com.magicandphoenix.userServicedev.model;
 
 import com.magicandphoenix.userServicedev.controller.dto.UserDTO;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,11 +36,11 @@ public class User {
         setPassword(password);
     }
 
-    public User(UserDTO userDTO) {
+   /* public User(UserDTO userDTO) {
         setUsername(userDTO.getUsername());
         setEmail(userDTO.getEmail());
         setPassword(userDTO.getPassword());
-    }
+    }*/
 
     public Long getId() {
         return id;

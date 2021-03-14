@@ -51,6 +51,7 @@ public class AuthController {
     public String getUsernameByToken(@PathVariable String token){
         return jwtUtils.getUserNameFromJwtToken(token);
     }
+
     @GetMapping("/user-id/{token}")
     @ResponseStatus(HttpStatus.OK)
     public Long getUserIdByToken(@PathVariable String token){
