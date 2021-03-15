@@ -79,6 +79,11 @@ http://localhost:4200/
 
 
 _Ready! create your profile, login and create games, join games, create of update characters sheet, etc, etc...
+8. Note: Contries, Racial Lineage and Profession need to be exactly write. because in future it will be a list:
+ -- Country: BRITEN, ALTHWELTHEIM, FOSTIN, LORADUN, ISPANSAR, NONCARIA, SURKAYA
+ -- Racial Lineage: UNARII, LORANÄE, UMLII, ÔRKYANO, GHÛRKO
+ -- Profession: SOLDIER, DOCTOR, WITCH, NOBLE, SHAMAN, MERCENARY, ARCHELOGUE, PATHFINDER, THIEF
+ 
 
 # Diagrams
 Case Diagram
